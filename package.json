@@ -1,0 +1,29 @@
+{
+  "name": "ruflying",
+  "version": "1.0.0",
+  "description": "RUFyling - A web service that allows customers to purchase flights.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thadtayo/RUFlying.git"
+  },
+  "author": "CS336",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thadtayo/RUFlying/issues"
+  },
+  "homepage": "https://github.com/thadtayo/RUFlying#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  }
+}
