@@ -12,8 +12,8 @@ router.get('/', (req, res) => {
 });
 
 // get all reservations for a customer
-router.get('/:account_num', (req, res) => {
-    const account_num = req.params.account_num;
+router.get('/customer_reservation', (req, res) => {
+    const account_num = req.session.account_num;
     con.query(`SELECT * FROM Reservations JOIN HasReservations ON Reservations.reservation_num = HasReservations.reservation_num`, function(err, results, fields){
         if(err) throw err;
         res.json(results);
@@ -22,14 +22,14 @@ router.get('/:account_num', (req, res) => {
 
 // create reservation
 router.post('/', (req, res) => { //reservation_num, restrictions, booking_fee, date, total_fare, customer_rep
-    const reservation_num = req.params.reservation_num;
-    const restrictions = req.params.restrictions;
-    const booking_fee = req.params.booking_fee;
-    const date = req.params.date;
-    const total_fare = req.params.total_fare;
-    const customer_rep = req.params.customer_rep;
+    const reservation_num = req.body.reservation_num; //use uuid
+    const restrictions = req.body.restrictions;
+    const booking_fee = req.body.booking_fee;
+    const date = req.body.date;
+    const total_fare = req.body.total_fare;
+    const customer_rep = req.body.customer_rep;
 
-    con.query(`INSERT INTO Customers VALUES (${reservation_num}, ${restrictions}, ${booking_fee}, ${date}, ${total_fare}, ${customer_rep})`, function(err, results, fields){
+    con.query(`INSERT INTO Reservations VALUES (${reservation_num}, ${restrictions}, ${booking_fee}, ${date}, ${total_fare}, ${customer_rep})`, function(err, results, fields){
         if (err) throw err; 
         console.log('Inputted values into reservations successfully.');
     });
