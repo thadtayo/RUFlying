@@ -12,10 +12,16 @@ export class Register extends React.Component {
         this.onRegister = this.onRegister.bind(this)
 
         this.state = {
-            firstname: '',
-            lastname: '',
+            account_num: '',
             email: '',
-            password: ''
+            first: '',
+            last: '',
+            address: '',
+            zip: '',
+            phone: '',
+            pref: {},
+            state: ''
+
         }
     
 
@@ -24,14 +30,14 @@ export class Register extends React.Component {
     onChangeFirstname(e){
 
         this.setState({
-            firstname: e.target.value
+            first: e.target.value
         })
     }
 
     onChangeLastname(e){
 
         this.setState({
-            lastname: e.target.value
+            last: e.target.value
         })
     }
 
@@ -42,14 +48,28 @@ export class Register extends React.Component {
         })
     }
 
-    onChangePassword(e){
+    onChangeAddress(e){
 
         this.setState({
-            password: e.target.value
+            address: e.target.value
         })
     }
 
-    onRegister(e) {
+    onChangeZip(e){
+
+        this.setState({
+            zip: e.target.value
+        })
+    }
+
+    onChangePhone(e){
+
+        this.setState({
+            phone: e.target.value
+        })
+    }
+
+    onUpdate(e) {
         e.preventDefault();
 
         const user = {
@@ -59,7 +79,10 @@ export class Register extends React.Component {
             password: this.state.password
         }
 
-        localStorage.setItem("user data", JSON.stringify(user))
+        
+
+        //route.post('localhost:5000/customers/update/:user', user)
+            
         
     }
 
@@ -67,7 +90,7 @@ export class Register extends React.Component {
     render() {
         return (
             <div className = "base-container" ref= {this.props.containerRef}>
-                <div className = "header">Register</div>
+                <div className = "header">Edit User Information</div>
                 <div className = "content">
 
                    <div className = "image">
@@ -105,16 +128,37 @@ export class Register extends React.Component {
                             />
                         </div>
                         <div className = "form-group">
-                            <label htmlFor = "password">Password</label>
-                            <input type="password"
+                            <label htmlFor = "address">Address</label>
+                            <input type="text"
                                 required 
-                                name ="password" 
-                                placeholder = "password"
-                                value = {this.state.password}
-                                onChange = {this.onChangePassword}
-
+                                name ="address" 
+                                placeholder = "address"
+                                value = {this.state.address}
+                                onChange = {this.onChangeAddress}
                             />
                         </div>
+                        <div className = "form-group">
+                            <label htmlFor = "address">Zip</label>
+                            <input type="text"
+                                required 
+                                name ="zip" 
+                                placeholder = "zip"
+                                value = {this.state.zip}
+                                onChange = {this.onChangeZip}
+                            />
+                        </div>
+                        <div className = "form-group">
+                            <label htmlFor = "address">Phone</label>
+                            <input type="text"
+                                required 
+                                name ="phone" 
+                                placeholder = "phone"
+                                value = {this.state.phone}
+                                onChange = {this.onChangePhone}
+                            />
+                        </div>
+                        
+                        
                     </div> 
                 </div>
                 <div className = "footer">
