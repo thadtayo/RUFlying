@@ -26,6 +26,10 @@ class App extends React.Component {
     this.setState((prevState) => ({ isLogginActive: !prevState.isLogginActive}) )
   }
 
+  componentDidMount() {
+    this.rightSide.classList.add("right");
+  }
+
   render() {
     const { isLogginActive } = this.state
     const current = isLogginActive ? "Register" : "Login"
