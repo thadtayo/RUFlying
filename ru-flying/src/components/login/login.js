@@ -1,14 +1,20 @@
 import React from 'react'
+import {useHistory} from "react-router-dom"
+
 import loginImg from '../../yeKcim-plane.svg'
 
-export class Login extends React.Component {
-    constructor(props) {
-        super(props);
+export default (props) => {
+    let history = useHistory()
+
+    var loggedIn = () => {
+        
+        
+
+        history.push("/");
     }
 
-    render() {
         return (
-            <div className = "base-container" ref= {this.props.containerRef}>
+            <div className = "base-container" ref= {props.containerRef}>
                 <div className = "header">Login</div>
                 <div className = "content">
 
@@ -28,13 +34,11 @@ export class Login extends React.Component {
                     </div> 
                 </div>
                 <div className = "footer">
-                    <button type = "button" className = "btn">Login</button>
+                    <button type = "button" className = "btn" onClick = {loggedIn}>Login</button>
                 </div>
-
-
             </div>
         )
     }
-}
+
 
 

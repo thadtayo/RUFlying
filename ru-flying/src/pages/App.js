@@ -1,7 +1,6 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
-import { Login, Register } from "./components/login/index"
+import '../styles/App.scss';
+import { Login, Register } from "../components/login"
 
 
 class App extends React.Component {
@@ -11,10 +10,10 @@ class App extends React.Component {
     this.state = {
       isLogginActive: true
     }
-  }
+  } 
 
   changeState() {
-    const { isLogginActive} = this.state
+    const {isLogginActive} = this.state
 
     if(isLogginActive){
       this.rightSide.classList.remove("right")
@@ -23,7 +22,9 @@ class App extends React.Component {
       this.rightSide.classList.remove("left")
       this.rightSide.classList.add("right")
     }
-    this.setState((prevState) => ({ isLogginActive: !prevState.isLogginActive}) )
+    this.setState({
+      isLogginActive: !isLogginActive
+    })
   }
 
   componentDidMount() {
