@@ -1,7 +1,7 @@
 import React from 'react'
 import loginImg from '../yeKcim-plane.svg'
 
-export class Register extends React.Component {
+export default class Register extends React.Component {
     constructor(props) {
         super(props)
 

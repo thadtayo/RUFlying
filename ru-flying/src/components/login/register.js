@@ -1,7 +1,18 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useHistory} from "react-router-dom"
 import loginImg from '../../yeKcim-plane.svg'
 
 export default (props) => {
+    let history = useHistory();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const register = () => {
+        //validation code
+        history.push("/");
+    }
 
         return (
             <div className = "base-container" ref= {props.containerRef}>
@@ -19,6 +30,8 @@ export default (props) => {
                                 required 
                                 name =" firstname" 
                                 placeholder = "First Name"
+                                value = {firstName}
+                                onChange = {e => setFirstName(e.target.value)}
 
                             />
                         </div>
@@ -27,6 +40,8 @@ export default (props) => {
                             <input type="lastname" 
                                 name =" lastname" 
                                 placeholder = "Last Name"
+                                value = {lastName}
+                                onChange = {e => setLastName(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -35,6 +50,8 @@ export default (props) => {
                                 required
                                 name =" email" 
                                 placeholder = "email"
+                                value = {email}
+                                onChange = {e => setEmail(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -43,6 +60,8 @@ export default (props) => {
                                 required 
                                 name ="password" 
                                 placeholder = "password"
+                                value = {password}
+                                onChange = {e => setPassword(e.target.value)}
 
                             />
                         </div>
@@ -51,10 +70,9 @@ export default (props) => {
                 <div className = "footer">
                     <button type = "button" 
                         className = "btn"
+                        onClick = {register}
                     >
-                        
                         Register
-                        
                     </button>
                 </div>
 
