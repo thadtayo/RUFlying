@@ -1,4 +1,4 @@
-import App from "./App";
+import LoginRegister from "./LoginRegister";
 import Home from "./Home"
 
-export {App, Home};
+export {LoginRegister, Home};
