@@ -8,8 +8,11 @@ export class Register extends React.Component {
         this.onChangeFirstname = this.onChangeFirstname.bind(this)
         this.onChangeLastname = this.onChangeLastname.bind(this)
         this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.onRegister = this.onRegister.bind(this)
+        this.onChangeAddress = this.onChangeAddress.bind(this)
+        this.onChangeZip = this.onChangeZip.bind(this)
+        this.onChangePhone = this.onChangePhone.bind(this)
+        this.onChangeState = this.onChangeState.bind(this)
+        this.onChangeCredit = this.onChangeCredit.bind(this)
 
         this.state = {
             account_num: '',
@@ -20,7 +23,8 @@ export class Register extends React.Component {
             zip: '',
             phone: '',
             pref: {},
-            state: ''
+            state: '',
+            creditcard: ''
 
         }
     
@@ -69,14 +73,31 @@ export class Register extends React.Component {
         })
     }
 
+    onChangeState(e){
+
+        this.setState({
+            state: e.target.value
+        })
+    }
+
+    onChangeCredit(e){
+
+        this.setState({
+            creditcard: e.target.value
+        })
+    }
+
     onUpdate(e) {
         e.preventDefault();
 
         const user = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
+            first: this.state.first,
+            last: this.state.last,
             email: this.state.email,
-            password: this.state.password
+            address: this.state.address,
+            zip: this.state.zip,
+            state: this.state.state,
+            creditcard: this.state.creditcard
         }
 
         
@@ -148,7 +169,7 @@ export class Register extends React.Component {
                             />
                         </div>
                         <div className = "form-group">
-                            <label htmlFor = "address">Phone</label>
+                            <label htmlFor = "phone">Phone</label>
                             <input type="text"
                                 required 
                                 name ="phone" 
@@ -157,17 +178,37 @@ export class Register extends React.Component {
                                 onChange = {this.onChangePhone}
                             />
                         </div>
+                        <div className = "form-group">
+                            <label htmlFor = "state">State</label>
+                            <input type="text"
+                                required 
+                                name ="state" 
+                                placeholder = "State"
+                                value = {this.state.state}
+                                onChange = {this.onChangeState}
+                            />
+                        </div>
                         
+                        <div className = "form-group">
+                            <label htmlFor = "creditcard">Credit Card</label>
+                            <input type="text"
+                                required 
+                                name ="creditcard" 
+                                placeholder = "Credit Card"
+                                value = {this.state.creditcard}
+                                onChange = {this.onChangeCredit}
+                            />
+                        </div>
                         
                     </div> 
                 </div>
                 <div className = "footer">
                     <button type = "button" 
                         className = "btn"
-                        onClick = {this.onRegister}
+                        onClick = {this.onUpdate}
                     >
                         
-                        Register
+                        Save
                         
                     </button>
                 </div>

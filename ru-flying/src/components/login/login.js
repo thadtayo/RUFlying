@@ -1,5 +1,6 @@
 import React from 'react'
 import loginImg from '../../yeKcim-plane.svg'
+import {useHistory} from 'react-router-dom'
 
 export class Login extends React.Component {
     constructor(props) {
@@ -40,8 +41,14 @@ export class Login extends React.Component {
         }
 
         console.log(user)
+       
+        // check username/ password
+        //if valid check manager or customer
+        //get user account number and add user to local storage and navigate to customer dashboard or manager dashboard
 
-        
+    
+
+
     }
 
     render() {

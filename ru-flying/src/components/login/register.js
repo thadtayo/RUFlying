@@ -59,7 +59,9 @@ export class Register extends React.Component {
             password: this.state.password
         }
 
-        localStorage.setItem("user data", JSON.stringify(user))
+        //add user to database
+
+        //send user to login page
         
     }
 
