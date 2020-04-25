@@ -14,34 +14,6 @@ export default (props) => {
         history.push("/");
     }
 
-<<<<<<< HEAD
-    onChangePassword(e){
-
-        this.setState({
-            password: e.target.value
-        })
-    }
-
-    onRegister(e) {
-        e.preventDefault();
-
-        const user = {
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            email: this.state.email,
-            password: this.state.password
-        }
-
-        //add user to database
-
-        //send user to login page
-        
-    }
-
-
-    render() {
-=======
->>>>>>> e6baf05e5cfd7261652a4766ef54a7b0008014f8
         return (
             <div className = "base-container" ref= {props.containerRef}>
                 <div className = "header">Register</div>
