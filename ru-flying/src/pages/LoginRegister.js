@@ -1,13 +1,9 @@
 import React from 'react';
 
-import '../../App.scss';
-import { Login, Register } from "./index"
+import '../styles/App.scss';
+import { Login, Register } from "../components/login/index"
 
-
-
-
-
-export default class loginRegister extends React.Component{
+export default class LoginRegister extends React.Component{
     constructor(props) {
         super(props)
     
@@ -41,12 +37,10 @@ export default class loginRegister extends React.Component{
           <div className="App">
             <div className ="login">
               <div className = "container">
-                  {isLogginActive && (
-                  <Login containerRef = {(ref) => this.current = ref}/> 
-                  )}
-                  {!isLogginActive && (
-                  <Register containerRef = {(ref) => this.current = ref} />
-                  )}
+                  {isLogginActive ? 
+                    <Login containerRef = {(ref) => this.current = ref}/> :
+                    <Register containerRef = {(ref) => this.current = ref}/>
+                  }
               </div>
               <RightSide current = {current} containerRef = {ref => this.rightSide = ref} onClick = {this.changeState.bind(this)}/>
             </div>

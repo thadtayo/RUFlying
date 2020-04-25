@@ -1,47 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {useHistory} from "react-router-dom"
 import loginImg from '../../yeKcim-plane.svg'
 
-export class Register extends React.Component {
-    constructor(props) {
-        super(props)
+export default (props) => {
+    let history = useHistory();
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-        this.onChangeFirstname = this.onChangeFirstname.bind(this)
-        this.onChangeLastname = this.onChangeLastname.bind(this)
-        this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangePassword = this.onChangePassword.bind(this)
-        this.onRegister = this.onRegister.bind(this)
-
-        this.state = {
-            firstname: '',
-            lastname: '',
-            email: '',
-            password: ''
-        }
-    
-
+    const register = () => {
+        //validation code
+        history.push("/");
     }
 
-    onChangeFirstname(e){
-
-        this.setState({
-            firstname: e.target.value
-        })
-    }
-
-    onChangeLastname(e){
-
-        this.setState({
-            lastname: e.target.value
-        })
-    }
-
-    onChangeEmail(e){
-
-        this.setState({
-            email: e.target.value
-        })
-    }
-
+<<<<<<< HEAD
     onChangePassword(e){
 
         this.setState({
@@ -67,8 +40,10 @@ export class Register extends React.Component {
 
 
     render() {
+=======
+>>>>>>> e6baf05e5cfd7261652a4766ef54a7b0008014f8
         return (
-            <div className = "base-container" ref= {this.props.containerRef}>
+            <div className = "base-container" ref= {props.containerRef}>
                 <div className = "header">Register</div>
                 <div className = "content">
 
@@ -83,8 +58,9 @@ export class Register extends React.Component {
                                 required 
                                 name =" firstname" 
                                 placeholder = "First Name"
-                                value = {this.state.firstname}
-                                onChange = {this.onChangeFirstname}
+                                value = {firstName}
+                                onChange = {e => setFirstName(e.target.value)}
+
                             />
                         </div>
                         <div className = "form-group">
@@ -92,8 +68,8 @@ export class Register extends React.Component {
                             <input type="lastname" 
                                 name =" lastname" 
                                 placeholder = "Last Name"
-                                value = {this.state.lastname}
-                                onChange = {this.onChangeLastname}
+                                value = {lastName}
+                                onChange = {e => setLastName(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -102,8 +78,8 @@ export class Register extends React.Component {
                                 required
                                 name =" email" 
                                 placeholder = "email"
-                                value = {this.state.email}
-                                onChange = {this.onChangeEmail}
+                                value = {email}
+                                onChange = {e => setEmail(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -112,8 +88,8 @@ export class Register extends React.Component {
                                 required 
                                 name ="password" 
                                 placeholder = "password"
-                                value = {this.state.password}
-                                onChange = {this.onChangePassword}
+                                value = {password}
+                                onChange = {e => setPassword(e.target.value)}
 
                             />
                         </div>
@@ -122,11 +98,9 @@ export class Register extends React.Component {
                 <div className = "footer">
                     <button type = "button" 
                         className = "btn"
-                        onClick = {this.onRegister}
+                        onClick = {register}
                     >
-                        
                         Register
-                        
                     </button>
                 </div>
 
@@ -134,4 +108,4 @@ export class Register extends React.Component {
             </div>
         )
     }
-}
+

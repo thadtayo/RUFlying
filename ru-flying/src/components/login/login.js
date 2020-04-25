@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import loginImg from '../../yeKcim-plane.svg'
 import {useHistory} from 'react-router-dom'
@@ -23,23 +24,14 @@ export class Login extends React.Component {
         })
 
     }
+=======
+import React, {useState} from 'react'
+import {useHistory} from "react-router-dom"
+>>>>>>> e6baf05e5cfd7261652a4766ef54a7b0008014f8
 
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        })
+import loginImg from '../../yeKcim-plane.svg'
 
-    }
-
-    onSignIn(e) {
-        e.preventDefault();
-
-        const user = {
-            username: this.state.username,
-            password: this.state.password,
-            
-        }
-
+<<<<<<< HEAD
         console.log(user)
        
         // check username/ password
@@ -49,11 +41,20 @@ export class Login extends React.Component {
     
 
 
+=======
+export default (props) => {
+    let history = useHistory()
+    const [userName, setUserName] = useState("");
+    const [password, setPassword] = useState("");
+
+    var loggedIn = () => {
+        //validation code
+        history.push("/");
+>>>>>>> e6baf05e5cfd7261652a4766ef54a7b0008014f8
     }
 
-    render() {
         return (
-            <div className = "base-container" ref= {this.props.containerRef}>
+            <div className = "base-container" ref= {props.containerRef}>
                 <div className = "header">Login</div>
                 <div className = "content">
 
@@ -68,8 +69,8 @@ export class Login extends React.Component {
                                 required 
                                 name =" username" 
                                 placeholder = "username"
-                                value = {this.state.username}
-                                onChange = {this.onChangeUsername}
+                                value = {userName}
+                                onChange = {e => setUserName(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -78,8 +79,8 @@ export class Login extends React.Component {
                                 required
                                 name ="password" 
                                 placeholder = "password"
-                                value = {this.state.password}
-                                onChange = {this.onChangePassword}
+                                value = {password}
+                                onChange = {e => setPassword(e.target.value)}
 
                             />
                         </div>
@@ -88,19 +89,11 @@ export class Login extends React.Component {
 
 
                 <div className = "footer">
-                    <button type = "button" 
-                    className = "btn" 
-                    onClick = {this.onSignIn}>
-                        
-                        Login
-                    
-                    </button>
+                    <button type = "button" className = "btn" onClick = {loggedIn}>Login</button>
                 </div>
-
-
             </div>
         )
     }
-}
+
 
 
