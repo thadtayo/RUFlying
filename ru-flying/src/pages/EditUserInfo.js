@@ -1,114 +1,34 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import loginImg from '../yeKcim-plane.svg'
 
-export default class Register extends React.Component {
-    constructor(props) {
-        super(props)
+export default (props) => {
+    const [firstname, setFirstname ] = useState(" ")
+    const [lastname, setLastname ] = useState(" ")
+    const [email, setEmail ] = useState(" ")
+    const [address, setAddress ] = useState(" ")
+    const [zip, setZip ] = useState(" ")
+    const [phone, setPhone ] = useState(" ")
+    const [state, setState ] = useState(" ")
+    const [credit, setCredit ] = useState(" ")
 
-        this.onChangeFirstname = this.onChangeFirstname.bind(this)
-        this.onChangeLastname = this.onChangeLastname.bind(this)
-        this.onChangeEmail = this.onChangeEmail.bind(this)
-        this.onChangeAddress = this.onChangeAddress.bind(this)
-        this.onChangeZip = this.onChangeZip.bind(this)
-        this.onChangePhone = this.onChangePhone.bind(this)
-        this.onChangeState = this.onChangeState.bind(this)
-        this.onChangeCredit = this.onChangeCredit.bind(this)
 
-        this.state = {
-            account_num: '',
-            email: '',
-            first: '',
-            last: '',
-            address: '',
-            zip: '',
-            phone: '',
-            pref: {},
-            state: '',
-            creditcard: ''
+  const onUpdate = () => {
+       //get user account num from local storage 
+       var user = {
+           first: firstname,
+           last: lastname,
+           email: email,
+           address: address,
+           zip: zip,
+           phone: phone,
+           state: state,
+           credit: credit
+       }
 
-        }
+       //get account num from local storage
+       //update account with user obj
+    }
     
-
-    }
-
-    onChangeFirstname(e){
-
-        this.setState({
-            first: e.target.value
-        })
-    }
-
-    onChangeLastname(e){
-
-        this.setState({
-            last: e.target.value
-        })
-    }
-
-    onChangeEmail(e){
-
-        this.setState({
-            email: e.target.value
-        })
-    }
-
-    onChangeAddress(e){
-
-        this.setState({
-            address: e.target.value
-        })
-    }
-
-    onChangeZip(e){
-
-        this.setState({
-            zip: e.target.value
-        })
-    }
-
-    onChangePhone(e){
-
-        this.setState({
-            phone: e.target.value
-        })
-    }
-
-    onChangeState(e){
-
-        this.setState({
-            state: e.target.value
-        })
-    }
-
-    onChangeCredit(e){
-
-        this.setState({
-            creditcard: e.target.value
-        })
-    }
-
-    onUpdate(e) {
-        e.preventDefault();
-
-        const user = {
-            first: this.state.first,
-            last: this.state.last,
-            email: this.state.email,
-            address: this.state.address,
-            zip: this.state.zip,
-            state: this.state.state,
-            creditcard: this.state.creditcard
-        }
-
-        
-
-        //route.post('localhost:5000/customers/update/:user', user)
-            
-        
-    }
-
-
-    render() {
         return (
             <div className = "base-container" ref= {this.props.containerRef}>
                 <div className = "header">Edit User Information</div>
@@ -125,8 +45,8 @@ export default class Register extends React.Component {
                                 required 
                                 name =" firstname" 
                                 placeholder = "First Name"
-                                value = {this.state.firstname}
-                                onChange = {this.onChangeFirstname}
+                                value = {firstname}
+                                onChange = {e => setFirstname(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -134,8 +54,8 @@ export default class Register extends React.Component {
                             <input type="lastname" 
                                 name =" lastname" 
                                 placeholder = "Last Name"
-                                value = {this.state.lastname}
-                                onChange = {this.onChangeLastname}
+                                value = {lastname}
+                                onChange = {e => setLastname(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -144,8 +64,8 @@ export default class Register extends React.Component {
                                 required
                                 name =" email" 
                                 placeholder = "email"
-                                value = {this.state.email}
-                                onChange = {this.onChangeEmail}
+                                value = {email}
+                                onChange = {e => setEmail(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -154,18 +74,18 @@ export default class Register extends React.Component {
                                 required 
                                 name ="address" 
                                 placeholder = "address"
-                                value = {this.state.address}
-                                onChange = {this.onChangeAddress}
+                                value = {address}
+                                onChange = {e => setAddress(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
-                            <label htmlFor = "address">Zip</label>
+                            <label htmlFor = "zip">Zip</label>
                             <input type="text"
                                 required 
                                 name ="zip" 
                                 placeholder = "zip"
-                                value = {this.state.zip}
-                                onChange = {this.onChangeZip}
+                                value = {zip}
+                                onChange = {e => setZip(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -174,8 +94,8 @@ export default class Register extends React.Component {
                                 required 
                                 name ="phone" 
                                 placeholder = "phone"
-                                value = {this.state.phone}
-                                onChange = {this.onChangePhone}
+                                value = {phone}
+                                onChange = {e => setPhone(e.target.value)}
                             />
                         </div>
                         <div className = "form-group">
@@ -184,8 +104,8 @@ export default class Register extends React.Component {
                                 required 
                                 name ="state" 
                                 placeholder = "State"
-                                value = {this.state.state}
-                                onChange = {this.onChangeState}
+                                value = {state}
+                                onChange = {e => setState(e.target.value)}
                             />
                         </div>
                         
@@ -195,8 +115,8 @@ export default class Register extends React.Component {
                                 required 
                                 name ="creditcard" 
                                 placeholder = "Credit Card"
-                                value = {this.state.creditcard}
-                                onChange = {this.onChangeCredit}
+                                value = {credit}
+                                onChange = {e => setCredit(e.target.value)}
                             />
                         </div>
                         
@@ -217,4 +137,4 @@ export default class Register extends React.Component {
             </div>
         )
     }
-}
+

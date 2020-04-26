@@ -7,9 +7,10 @@ export default (props) => {
     let history = useHistory()
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [loginResp, setLoginResp] = useState("");
 
     var loggedIn = () => {
-        //validation code
+        
         history.push("/");
     }
 
