@@ -39,7 +39,9 @@ router.post('/purchase-flight', (req, res) => {
     const depart_time = req.body.depart_time;
     const arrive_time = req.body.arrive_time;
     const restrictions = req.body.restrictions;
-    const account_num = '626a6aee7b3c4f9a8503642ef19c458f'; // USE REQ.SESSION.ACCOUNT_NUM
+
+    const account_num = req.session.account_num; 
+    
     // create reservation
     let reservation_num = uuid.v4();
     // remove 4 hyphens
