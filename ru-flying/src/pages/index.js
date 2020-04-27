@@ -1,6 +1,6 @@
 import LoginRegister from "./LoginRegister";
 import Home from "./Home"
 import EditUser from "./EditUserInfo";
-import CostumerProfile from "./CustomerProfile";
+import CustomerProfile from "./CustomerProfile";
 
-export {LoginRegister, Home, EditUser, CostumerProfile};
+export {LoginRegister, Home, EditUser, CustomerProfile};
