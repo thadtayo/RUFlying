@@ -113,6 +113,9 @@ router.post('/login', (req, res) =>{
 // update user information
 // TODO: CHECK THIS ON ACTUAL SESSION... DON'T WANNA BOTHER LEARNING SESSIONS ON POSTMAN
 router.post('/update', (req, res) => {
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     let first = req.body.first;
     let last = req.body.last;
     let address = req.body.address;
@@ -158,6 +161,9 @@ router.post('/update', (req, res) => {
 
 // fetches all current reservations of a user
 router.get('/active-reservations', (req, res) =>{
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     const account_num = req.session.account_num; 
     var sql = `SELECT Reservations.*
      FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\" 
@@ -171,6 +177,9 @@ router.get('/active-reservations', (req, res) =>{
 
 // fetches all current and past reservations of a user
 router.get('/all-reservations', (req, res) => {
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     const account_num = req.session.account_num; 
     var sql = `SELECT Reservations.*
      FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\"`;
@@ -181,6 +190,16 @@ router.get('/all-reservations', (req, res) => {
     });
 });
 
+// log a user out, redirecting to login page
+router.get('/logout', (req, res) =>{
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
+    req.session.destroy(function(err){
+        if (err) throw err;
+    });
+    res.redirect('/login');
+});
 
 // TODO: PASSWORD RESET SEND LINK ON EMAIL
 module.exports = router;
