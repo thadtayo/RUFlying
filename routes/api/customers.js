@@ -113,25 +113,54 @@ router.post('/login', (req, res) =>{
 // update user information
 // TODO: CHECK THIS ON ACTUAL SESSION... DON'T WANNA BOTHER LEARNING SESSIONS ON POSTMAN
 router.post('/update', (req, res) => {
-    const first = req.body.first;
-    const last = req.body.last;
-    const address = req.body.address;
-    const zip = req.body.zip;
-    const phone = req.body.phone;
-    const pref = req.body.preferences;
-    const state = req.body.state;
-
-    con.query(`UPDATE  Customers SET first_name = \"${first}\", last_name = \"${last}\", address = \"${address}\", zip = ${zip}, phone = ${phone}, preferences= \"${preferences}\", state = \"${state}\"`, function(err){
+    let first = req.body.first;
+    let last = req.body.last;
+    let address = req.body.address;
+    let zip = req.body.zip;
+    let phone = req.body.phone;
+    let pref = req.body.preferences;
+    let state = req.body.state;
+    let account_num = req.session.account_num;
+    let sql = `SELECT * FROM Customers WHERE account_num = \"${account_num}\"`;
+    con.query(sql, function(err, results){
         if (err) throw err;
-        res.send('Updated information successfully.');
+        
+        // if null, change to what it was originally
+        if(first == ''){
+            first = results[0]['first_name'];
+        }
+        if(last == ''){
+            last = results[0]['last_name'];
+        }
+        if(address == ''){
+            address = results[0]['address'];
+        }
+        if(zip == ''){
+            zip = results[0]['zip'];
+        }
+        if(phone == ''){
+            phone = results[0]['phone'];
+        }
+        if(pref == ''){
+            pref = results[0]['preferences'];
+        }
+        if(state == ''){
+            state = results[0]['state'];
+        }
+        let sql2 = `UPDATE  Customers SET first_name = \"${first}\", last_name = \"${last}\", address = \"${address}\", zip = ${zip}, phone = ${phone}, preferences= \"${pref}\", state = \"${state}\" WHERE account_num = \"${account_num}\"`;
+        con.query(sql2, function(err2){
+            if (err2) throw err2;
+            res.send('Updated information successfully.');
+        });
     });
+    
 });
 
 // fetches all current reservations of a user
 router.get('/active-reservations', (req, res) =>{
     const account_num = req.session.account_num; 
-    var sql = `SELECT Reservations.reservation_num, Reservations.restrictions, Reservations.booking_fee, Reservations.date,
-     Reservations.total_fare, Reservations.customer_rep FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\" 
+    var sql = `SELECT Reservations.*
+     FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\" 
      AND Reservations.date >= CURDATE()`;
 
     con.query(sql, function(err, results){
@@ -143,13 +172,15 @@ router.get('/active-reservations', (req, res) =>{
 // fetches all current and past reservations of a user
 router.get('/all-reservations', (req, res) => {
     const account_num = req.session.account_num; 
-    var sql = `SELECT Reservations.reservation_num, Reservations.restrictions, Reservations.booking_fee, Reservations.date,
-     Reservations.total_fare, Reservations.customer_rep FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\"`;
+    var sql = `SELECT Reservations.*
+     FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\"`;
 
     con.query(sql, function(err, results){
         if (err) throw err;
         res.json(results);
     });
 });
+
+
 // TODO: PASSWORD RESET SEND LINK ON EMAIL
 module.exports = router;
