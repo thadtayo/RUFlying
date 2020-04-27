@@ -5,6 +5,9 @@ const uuid = require('uuid');
 
 // get all flights
 router.get('/', (req, res) => {
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     con.query("SELECT * FROM Flights", function(err, results, fields){
         if(err) throw err;
         res.json(results);
@@ -14,6 +17,9 @@ router.get('/', (req, res) => {
 
 // shows lists of flights given a start and end airport
 router.post('/show-flights', (req, res) =>{
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     const start = req.body.start;
     const end = req.body.end;
     const sql = `SELECT  f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
@@ -25,6 +31,7 @@ router.post('/show-flights', (req, res) =>{
         for(let i = 0; i < count; i++){
             let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
             results[i]['total_fare'] = results[i]['fares'] * num_stops;
+            results[i]['num_stops'] = num_stops;
         }
         res.json(results);
     });
@@ -32,6 +39,9 @@ router.post('/show-flights', (req, res) =>{
 
 // purchase flight, creating a reservation
 router.post('/purchase-flight', (req, res) => {
+    if(req.session.account_num == undefined){
+        return res.send('You must be logged in to do that!');
+    }
     const start = req.body.start;
     const end = req.body.end;
     const flight_num = req.body.flight_num;
@@ -39,9 +49,10 @@ router.post('/purchase-flight', (req, res) => {
     const depart_time = req.body.depart_time;
     const arrive_time = req.body.arrive_time;
     const restrictions = req.body.restrictions;
+    const num_stops = req.body.num_stops;
 
-    const account_num = req.session.account_num; 
-    
+    const account_num = req.session.account_num;
+
     // create reservation
     let reservation_num = uuid.v4();
     // remove 4 hyphens
@@ -70,8 +81,8 @@ router.post('/purchase-flight', (req, res) => {
                     isDomestic = false;
                 }
                 // with customer_rep selected, create reservation
-                var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic) 
-                VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic})`;
+                var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops) 
+                VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops})`;
                 con.query(sql2, function(err2){
                     if (err2) throw err2;
                     // Reservation created. Now, create hasReservations
