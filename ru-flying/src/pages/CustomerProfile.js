@@ -1,7 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import './Profile.scss'
+import '../styles/profile.scss'
+import { unstable_batchedUpdates } from 'react-dom'
 
-export default (props) => {
+import {useHistory} from "react-router-dom"
+
+export default () => {
+    let history = useHistory()
+    
+   
+    
+    
     const [firstname, setFirstname ] = useState(" ")
     const [lastname, setLastname ] = useState(" ")
     const [email, setEmail ] = useState(" ")
@@ -12,19 +20,21 @@ export default (props) => {
     const [credit, setCredit ] = useState(" ")
     
 
-    useEffect(() => {
-        //get account from local storage
-        //get user info from db
-        //update state
-    })
+    // useEffect(() => {
+    //     //get account from local storage
+    //     //get user info from db
+    //     //update state
+    // })
 
-    
+   var EditUserInfo = () => { 
+        history.push("/edit")
+    }
     
     
         return (
             <body className ="body">
-            <div className = "container">
-                <h1 className = "header">Customer Profile</h1>
+            <div className = "prof-container">
+                <h1 className = "prof-header">Customer Profile</h1>
                 
                 <div className = "firstname">
                     <p>First Name: </p>
@@ -54,8 +64,8 @@ export default (props) => {
 
                 <div className = "footer">
                     <button type = "button" 
-                        className = "btn"
-                        // onClick = send to update page
+                        className = "update-btn"
+                        onClick = {EditUserInfo}
                     >
                             Update
                         </button>

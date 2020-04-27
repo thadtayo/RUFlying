@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {useHistory} from "react-router-dom"
+import axios from 'axios'
 
 import loginImg from '../../yeKcim-plane.svg'
 
@@ -9,8 +10,17 @@ export default (props) => {
     const [password, setPassword] = useState("");
     const [loginResp, setLoginResp] = useState("");
 
-    var loggedIn = () => {
-        
+    var loggedIn = async () => {
+
+        const body = {
+            email: userName,
+            password: password
+        }
+       let res = await axios.post('http://localhost:5000/login', body)
+
+
+       
+
         history.push("/");
     }
 

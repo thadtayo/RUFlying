@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import loginImg from '../yeKcim-plane.svg'
 
 export default (props) => {
@@ -12,31 +12,29 @@ export default (props) => {
     const [credit, setCredit ] = useState(" ")
 
 
-  const onUpdate = () => {
-       //get user account num from local storage 
-       var user = {
-           first: firstname,
-           last: lastname,
-           email: email,
-           address: address,
-           zip: zip,
-           phone: phone,
-           state: state,
-           credit: credit
-       }
+//   const onUpdate = () => {
+//        //get user account num from local storage 
+//        var user = {
+//            first: firstname,
+//            last: lastname,
+//            email: email,
+//            address: address,
+//            zip: zip,
+//            phone: phone,
+//            state: state,
+//            credit: credit
+//        }
 
        //get account num from local storage
        //update account with user obj
-    }
+    
     
         return (
-            <div className = "base-container" ref= {this.props.containerRef}>
+            <div className = "base-container" >
                 <div className = "header">Edit User Information</div>
                 <div className = "content">
 
-                   <div className = "image">
-                     <img src = {loginImg} />  
-                    </div>
+                   
 
                     <div className = "form">
                         <div className = "form-group">
@@ -125,7 +123,7 @@ export default (props) => {
                 <div className = "footer">
                     <button type = "button" 
                         className = "btn"
-                        onClick = {this.onUpdate}
+                        
                     >
                         
                         Save
@@ -136,5 +134,6 @@ export default (props) => {
 
             </div>
         )
+          
     }
 
