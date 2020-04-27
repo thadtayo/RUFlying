@@ -201,5 +201,35 @@ router.get('/logout', (req, res) =>{
     res.redirect('/login');
 });
 
+// get list of stops of the flight, given a flight_num, start_airport, and end_airport (found from reservations view)
+router.post('/itinerary', (req, res) => {
+    const flight_num = req.body.flight_num; 
+    const start_airport = req.body.start_airport;
+    const end_airport = req.body.end_airport;
+
+    var sql = `SELECT airport_id, depart_time, arrive_time, stop_num FROM flightHasStops WHERE flight_num = ${flight_num} ORDER BY stop_num ASC`;
+    con.query(sql, function(err, results){
+        if (err) throw err;
+
+        // get all stops between start and end airport
+        let ret = {};
+        let index = 0;
+        let hitFirst = false;
+        for(let i = 0; i < Object.keys(results).length; i++){
+            if(results[i]['airport_id'] == start_airport){
+                hitFirst = true;
+            }
+            // if hitFirst, add current entry to js object
+            if(hitFirst){
+                ret[index] = results[i];
+                index++;
+            }
+            if(results[i]['airport_id'] == end_airport){
+                break;
+            }
+        }
+        res.json(ret);
+    });
+});
 // TODO: PASSWORD RESET SEND LINK ON EMAIL
 module.exports = router;
