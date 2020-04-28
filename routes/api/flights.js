@@ -22,9 +22,9 @@ router.post('/show-flights', (req, res) =>{
     }
     const start = req.body.start;
     const end = req.body.end;
-    const sql = `SELECT  f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
+    const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
     FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
-    AND f1.depart_time < f2.arrive_time`;
+    AND f1.depart_time < f2.arrive_time AND f1.depart_time >= CURDATE()`;
     con.query(sql, function(err, results){
         if (err) throw err;
         var count = Object.keys(results).length;
@@ -36,6 +36,7 @@ router.post('/show-flights', (req, res) =>{
         res.json(results);
     });
 });
+
 
 // purchase flight, creating a reservation
 router.post('/purchase-flight', (req, res) => {
