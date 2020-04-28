@@ -25,11 +25,8 @@
     "express-session": "^1.17.1",
     "mysql": "^2.18.1",
     "node-sass": "^4.14.0",
-<<<<<<< HEAD
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
-=======
->>>>>>> 54e6e1a6adc1e024444df00c7ae99faeeddb4027
     "react-scripts": "^3.4.1",
     "uuid": "^7.0.3"
   },
