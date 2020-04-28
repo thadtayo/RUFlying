@@ -26,7 +26,7 @@ export default (props) => {
             state: state,
             phone: phone 
         }
-       let res = await axios.post("http://localhost:5000/api/customers/register", user)
+       let res = await axios.post("/api/customers/register", user)
         
         
 

@@ -70,7 +70,7 @@ router.post('/register', (req, res) => { //account num , email  first_name , las
         });
     });
     
-    return res.redirect('/');
+    return res.send('Succesfully logged!');
 });
 
 // log in endpoint
