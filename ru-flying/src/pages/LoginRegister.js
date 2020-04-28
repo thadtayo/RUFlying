@@ -34,6 +34,7 @@ export default class LoginRegister extends React.Component{
         const current = isLogginActive ? "Register" : "Login"
         const currentActive = isLogginActive ? "login" : "register"
         return (
+          
           <div className="Ap">
             <div className ="login">
               <div className = "ap-container">
@@ -45,6 +46,7 @@ export default class LoginRegister extends React.Component{
               <RightSide current = {current} containerRef = {ref => this.rightSide = ref} onClick = {this.changeState.bind(this)}/>
             </div>
           </div>
+          
         )
       }
     }

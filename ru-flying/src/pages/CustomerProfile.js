@@ -22,7 +22,7 @@ export default () => {
     
 
     useEffect(() => {
-         setFirstname("test")
+         
      })
 
    var EditUserInfo = () => { 

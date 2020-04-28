@@ -74,7 +74,7 @@ export default (props) => {
 
 
                 <div className = "footer">
-                    <button type = "button" className = "btn" onClick = {loggedIn}>Login</button>
+                    <button type = "button" className = "butn" onClick = {loggedIn}>Login</button>
                 </div>
             </div>
         )
