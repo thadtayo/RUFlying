@@ -8,10 +8,13 @@ router.get('/', (req, res) => {
     if(req.session.account_num == undefined){
         return res.send('You must be logged in to do that!');
     }
-    con.query("SELECT * FROM Flights", function(err, results, fields){
-        if(err) throw err;
-        res.json(results);
+    con.getConnection(function(error, connection){
+        connection.query("SELECT * FROM Flights", function(err, results, fields){
+            if(err) throw err;
+            res.json(results);
+        });
     });
+
 });
 
 
@@ -23,18 +26,21 @@ router.post('/show-flights', (req, res) =>{
     const start = req.body.start;
     const end = req.body.end;
     const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
-    FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
+    FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
     AND f1.depart_time < f2.arrive_time AND f1.depart_time >= CURDATE()`;
-    con.query(sql, function(err, results){
-        if (err) throw err;
-        var count = Object.keys(results).length;
-        for(let i = 0; i < count; i++){
-            let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
-            results[i]['total_fare'] = results[i]['fares'] * num_stops;
-            results[i]['num_stops'] = num_stops;
-        }
-        res.json(results);
+    con.getConnection(function(error, connection){
+        connection.query(sql, function(err, results){
+            if (err) throw err;
+            var count = Object.keys(results).length;
+            for(let i = 0; i < count; i++){
+                let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
+                results[i]['total_fare'] = results[i]['fares'] * num_stops;
+                results[i]['num_stops'] = num_stops;
+            }
+            res.json(results);
+        });
     });
+
 });
 
 
@@ -63,38 +69,42 @@ router.post('/purchase-flight', (req, res) => {
     reservation_num = reservation_num.replace('-', '');
 
     var sql = 'SELECT account_num FROM Employees ORDER BY RAND() LIMIT 1'; // select a random customer_rep
-    con.query(sql, function(err,results){
-        if (err) throw err;
-        const customer_rep = results[0]['account_num'];
-
-        // check if domestic or international
-        var sql4 = `SELECT country FROM Airports WHERE airport_id = \"${start}\"`;
-        con.query(sql4, function(err4, results4){
-            if (err4) throw err4;
-            let country1 = results4[0]['country'];
-            var sql5 = `SELECT country FROM Airports WHERE airport_id = \"${end}\"`;
-
-            con.query(sql5, function(err5, results5){
-                if (err5) throw err5;
-                let country2 = results5[0]['country'];
-                let isDomestic = true;
-                if(country1 != country2){
-                    isDomestic = false;
-                }
-                // with customer_rep selected, create reservation
-                var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops) 
-                VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops})`;
-                con.query(sql2, function(err2){
-                    if (err2) throw err2;
-                    // Reservation created. Now, create hasReservations
-                    con.query(`INSERT INTO hasReservations VALUES (\"${account_num}\", \"${reservation_num}\")`, function(err3){
-                        if (err3) throw err3;
-                        res.send('Purchase confirmed! You can view this reservation again by going into your Profile > Reservations.');
+    con.getConnection(function(error, connection){
+        connection.query(sql, function(err,results){
+            if (err) throw err;
+            const customer_rep = results[0]['account_num'];
+    
+            // check if domestic or international
+            var sql4 = `SELECT country FROM Airports WHERE airport_id = \"${start}\"`;
+    
+            connection.query(sql4, function(err4, results4){
+                if (err4) throw err4;
+                let country1 = results4[0]['country'];
+                var sql5 = `SELECT country FROM Airports WHERE airport_id = \"${end}\"`;
+    
+                connection.query(sql5, function(err5, results5){
+                    if (err5) throw err5;
+                    let country2 = results5[0]['country'];
+                    let isDomestic = true;
+                    if(country1 != country2){
+                        isDomestic = false;
+                    }
+                    // with customer_rep selected, create reservation
+                    var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops) 
+                    VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops})`;
+                    connection.query(sql2, function(err2){
+                        if (err2) throw err2;
+                        // Reservation created. Now, create hasReservations
+                        connection.query(`INSERT INTO hasReservations VALUES (\"${account_num}\", \"${reservation_num}\")`, function(err3){
+                            if (err3) throw err3;
+                            res.send('Purchase confirmed! You can view this reservation again by going into your Profile > Reservations.');
+                        });
                     });
                 });
             });
         });
     });
+
 });
 
 
