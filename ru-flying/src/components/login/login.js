@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {useHistory} from "react-router-dom"
 import axios from 'axios'
 
+
 import loginImg from '../../yeKcim-plane.svg'
 
 export default (props) => {
@@ -9,6 +10,9 @@ export default (props) => {
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [loginResp, setLoginResp] = useState("");
+    const incorrectEmail = 'Incorrect email.'
+    const incorrectPassword = 'Incorrect password.'
+    const noEmailOrPassword = 'Please input your email and password.'
 
     var loggedIn = async () => {
 
@@ -17,13 +21,19 @@ export default (props) => {
             password: password
         }
        let res = await axios.post('http://localhost:5000/login', body)
-
-
+        
        
-
-        history.push("/");
+       if (res.data === incorrectEmail || res.data === incorrectPassword || res.data === noEmailOrPassword){
+           setLoginResp(res.data)
+           
+       } else {
+           history.push("/profile")
+       }
+    
     }
 
+
+    
         return (
             <div className = "base-container" ref= {props.containerRef}>
                 <div className = "header">Login</div>
@@ -32,10 +42,12 @@ export default (props) => {
                    <div className = "image">
                      <img src = {loginImg} />  
                     </div>
+                
 
                     <div className = "form">
                         <div className = "form-group">
                             <label htmlFor = "username">Username</label>
+                    
                             <input type="text"
                                 required 
                                 name =" username" 
@@ -57,6 +69,8 @@ export default (props) => {
                         </div>
                     </div> 
                 </div>
+
+                <div>{loginResp}</div>
 
 
                 <div className = "footer">

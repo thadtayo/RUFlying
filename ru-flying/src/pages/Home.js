@@ -1,10 +1,16 @@
 import React from "react";
+import Navbar from '../components/Navbar'
+
 
 export default () => {
 
     return (
-        <div>
-            <p>home</p>
-        </div>
+        <body>
+
+            <Navbar/> 
+
+            
+        </body>
+        
     )
 }

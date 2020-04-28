@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import loginImg from '../yeKcim-plane.svg'
-
+import Navbar from '../components/Navbar'
 export default (props) => {
     const [firstname, setFirstname ] = useState(" ")
     const [lastname, setLastname ] = useState(" ")
@@ -30,7 +29,10 @@ export default (props) => {
     
     
         return (
+            <body>
+                <Navbar/>
             <div className = "base-container" >
+                
                 <div className = "header">Edit User Information</div>
                 <div className = "content">
 
@@ -133,6 +135,7 @@ export default (props) => {
 
 
             </div>
+            </body>
         )
           
     }
