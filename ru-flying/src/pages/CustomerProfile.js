@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import '../styles/profile.scss'
-import { unstable_batchedUpdates } from 'react-dom'
+
+import Navbar from '../components/Navbar'
 
 import {useHistory} from "react-router-dom"
 
@@ -20,11 +21,9 @@ export default () => {
     const [credit, setCredit ] = useState(" ")
     
 
-    // useEffect(() => {
-    //     //get account from local storage
-    //     //get user info from db
-    //     //update state
-    // })
+    useEffect(() => {
+         setFirstname("test")
+     })
 
    var EditUserInfo = () => { 
         history.push("/edit")
@@ -33,21 +32,22 @@ export default () => {
     
         return (
             <body className ="body">
+                <Navbar/>
             <div className = "prof-container">
                 <h1 className = "prof-header">Customer Profile</h1>
                 
                 <div className = "firstname">
-                    <p>First Name: </p>
+                    <p>First Name: {firstname} </p>
                 </div>
 
                 <div className = "firstname">
-                    <p>Last Name: </p>
+                    <p>Last Name:{lastname} </p>
                 </div>
                 <div className = "firstname">
-                    <p>Email: </p>
+                    <p>Email:{email} </p>
                 </div>
                 <div className = "firstname">
-                    <p>Phone:</p>
+                    <p>Phone:{phone}</p>
                 </div>
 
                 <div className = "firstname">

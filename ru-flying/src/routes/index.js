@@ -2,7 +2,7 @@ import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
 import {LoginRegister, Home, CustomerProfile, EditUser} from "../pages";
-import EditUserInfo from "../pages/EditUserInfo";
+
 
 export default () => {
 
@@ -16,7 +16,7 @@ export default () => {
                     <CustomerProfile/>
                 </Route>
                 <Route path = "/edit">
-                    <EditUserInfo/>
+                    <EditUser/>
                 </Route>
                 <Route path = "/">
                     <Home/>
