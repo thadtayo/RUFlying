@@ -26,9 +26,9 @@ export default (props) => {
             state: state,
             phone: phone 
         }
-       let res = await axios.post("http://localhost:5000/register", user)
+       let res = await axios.post("http://localhost:5000/api/customers/register", user)
         
-        setResp(res.data)
+        
 
         history.push("/login");
     }
