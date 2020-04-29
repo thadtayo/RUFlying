@@ -1,0 +1,31 @@
+
+.search-container{
+    display: flex;
+    justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+.search-box{
+width: 50em;
+height: 30em;
+  //min-height: 44em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgba(128, 128, 128, 0.377);
+    
+  
+    
+}
+.search-header{
+    display: flex;
+    justify-content: center;
+    
+    
+}.search-body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}

@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
-import {LoginRegister, Home, CustomerProfile, EditUser} from "../pages";
+import {LoginRegister, Home, CustomerProfile, EditUser, FlightSearch, Reservations} from "../pages";
 
 
 export default () => {
@@ -17,6 +17,9 @@ export default () => {
                 </Route>
                 <Route path = "/edit">
                     <EditUser/>
+                </Route>
+                <Route path = "/search">
+                    <FlightSearch/>
                 </Route>
                 <Route path = "/">
                     <Home/>

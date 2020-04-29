@@ -4,6 +4,8 @@ import '../styles/profile.scss'
 import Navbar from '../components/Navbar'
 
 import {useHistory} from "react-router-dom"
+import axios from 'axios'
+import { json } from 'body-parser'
 
 export default () => {
     let history = useHistory()
@@ -21,8 +23,24 @@ export default () => {
     const [credit, setCredit ] = useState(" ")
     
 
-    useEffect(() => {
+    useEffect(  () => {
+        
+        async function getInfo(){
+        const res = await axios.get('api/customers/get-details')
+        console.log((res.data)[0].first_name)
+            const resobj = (res.data)[0]
+
+            setFirstname(resobj.first_name)
+            setLastname(resobj.last_name)
+            setEmail(resobj.email)
+            setAddress(resobj.address)
+            setZip(resobj.zip)
+            setPhone(resobj.phone)
+            setState(resobj.state)
+        }
          
+        getInfo()
+
      })
 
    var EditUserInfo = () => { 
@@ -41,25 +59,25 @@ export default () => {
                 </div>
 
                 <div className = "firstname">
-                    <p>Last Name:{lastname} </p>
+                    <p>Last Name: {lastname} </p>
                 </div>
                 <div className = "firstname">
-                    <p>Email:{email} </p>
+                    <p>Email: {email} </p>
                 </div>
                 <div className = "firstname">
-                    <p>Phone:{phone}</p>
-                </div>
-
-                <div className = "firstname">
-                    <p>Address:</p>
+                    <p>Phone: {phone}</p>
                 </div>
 
                 <div className = "firstname">
-                    <p>Zip: </p>
+                    <p>Address: {address}</p>
                 </div>
 
                 <div className = "firstname">
-                    <p>State: </p>
+                    <p>Zip: {zip} </p>
+                </div>
+
+                <div className = "firstname">
+                    <p>State: {state} </p>
                 </div>
 
                 <div className = "footer">

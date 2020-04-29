@@ -1,6 +1,10 @@
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
+import axios from 'axios'
+import {useHistory} from "react-router-dom"
+
 export default (props) => {
+    let history = useHistory()
     const [firstname, setFirstname ] = useState(" ")
     const [lastname, setLastname ] = useState(" ")
     const [email, setEmail ] = useState(" ")
@@ -11,21 +15,25 @@ export default (props) => {
     const [credit, setCredit ] = useState(" ")
 
 
-//   const onUpdate = () => {
-//        //get user account num from local storage 
-//        var user = {
-//            first: firstname,
-//            last: lastname,
-//            email: email,
-//            address: address,
-//            zip: zip,
-//            phone: phone,
-//            state: state,
-//            credit: credit
-//        }
+  const onUpdate = async () => {
+       //get user account num from local storage 
+       var user = {
+           first: firstname,
+           last: lastname,
+           email: email,
+           address: address,
+           zip: zip,
+           phone: phone,
+           state: state,
+       }
 
-       //get account num from local storage
-       //update account with user obj
+        axios.post('api/customers/update', user)
+
+       history.push("/profile")
+       
+    }
+
+       
     
     
         return (
@@ -125,6 +133,7 @@ export default (props) => {
                 <div className = "footer">
                     <button type = "button" 
                         className = "btn"
+                        onClick = {onUpdate}
                         
                     >
                         
