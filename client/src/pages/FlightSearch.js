@@ -3,6 +3,8 @@ import Navbar from '../components/Navbar'
 import axios from 'axios'
 import FlightList from '../components/FlightList'
 import "../styles/search.scss"
+import {Form, Row, Col} from 'react-bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default () => {
@@ -28,7 +30,7 @@ export default () => {
     }
     return(
         <body className = "search-body">
-        
+        <Navbar/>
         
             
 
@@ -40,7 +42,49 @@ export default () => {
             </div>
                 
 
-                <div className = "search-box">
+            <div className = "search-box">
+                <div className = "flight-radios">
+                    <Form>
+                        <fieldset>
+                            <Form.Group>
+                    
+                                <Form.Check
+                                    type="radio"
+                                    inline
+                                    label="One Way "
+                                    name="formHorizontalRadios"
+                                    id="formHorizontalRadios1"
+                                />
+                                <Form.Check
+                                    type="radio"
+                                    inline
+                                    label="Round Trip"
+                                    name="formHorizontalRadios"
+                                    id="formHorizontalRadios2"
+                                    />
+              
+                                </Form.Group>
+                        </fieldset>
+
+
+                        <fieldset>
+                            <Form.Group>
+                                <Row>
+                                    <Col>
+                                        <Form.Control placeholder="First name" />
+                                    </Col>
+                                    <Col>
+                                        <Form.Control placeholder="Last name" />
+                                    </Col>
+                                </Row>
+                            </Form.Group>
+                        </fieldset>
+ 
+                </Form>
+            </div>
+
+               
+
                     
                 </div>
 
