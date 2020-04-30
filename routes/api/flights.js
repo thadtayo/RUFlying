@@ -18,26 +18,44 @@ router.get('/', (req, res) => {
 });
 
 
-// shows lists of flights given a start and end airport
+// shows lists of flights given a start and end airport, as well as a preferred date
 router.post('/show-flights', (req, res) =>{
-    if(req.session.account_num == undefined){
-        return res.send('You must be logged in to do that!');
-    }
     const start = req.body.start;
     const end = req.body.end;
+    const date = req.body.pref_date;
+    
     const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
     FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
-    AND f1.depart_time < f2.arrive_time AND f1.depart_time >= CURDATE()`;
+    AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) = \"${date}\"`;
     con.getConnection(function(error, connection){
         connection.query(sql, function(err, results){
             if (err) throw err;
             var count = Object.keys(results).length;
-            for(let i = 0; i < count; i++){
-                let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
-                results[i]['total_fare'] = results[i]['fares'] * num_stops;
-                results[i]['num_stops'] = num_stops;
+            
+            // if none available for selected date, search for flights from up to 7 days prior
+            if(count == 0){
+                console.log('Giving recommendations near');
+                const sql2 = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
+                FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
+                AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) >= DATE_SUB(\"${date}\", INTERVAL 7 DAY)`;
+                connection.query(sql2, function(err2, results2){
+                    var count2 = Object.keys(results2).length;
+                    for(let i = 0; i < count2; i++){
+                        let num_stops = results2[i]['end_stop'] - results2[i]['start_stop'];
+                        results2[i]['total_fare'] = results2[i]['fares'] * num_stops;
+                        results2[i]['num_stops'] = num_stops;
+                    }
+                    res.json(results2);
+                });
             }
-            res.json(results);
+            else{
+                for(let i = 0; i < count; i++){
+                    let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
+                    results[i]['total_fare'] = results[i]['fares'] * num_stops;
+                    results[i]['num_stops'] = num_stops;
+                }
+                res.json(results);
+            }
         });
     });
 
