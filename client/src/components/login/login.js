@@ -20,7 +20,7 @@ export default (props) => {
             email: userName,
             password: password
         }
-       let res = await axios.post('http://localhost:5000/api/customers/login', body)
+       let res = await axios.post('api/customers/login', body)
         
        
        if (res.data === incorrectEmail || res.data === incorrectPassword || res.data === noEmailOrPassword){

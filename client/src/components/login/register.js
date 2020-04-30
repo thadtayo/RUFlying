@@ -28,6 +28,7 @@ export default (props) => {
         }
        let res = await axios.post("/api/customers/register", user)
         
+       console.log(res.data)
         
 
         history.push("/login");
