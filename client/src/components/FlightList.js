@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import Flight from './Flight'
 
 
 
-export default ({ results }) => {
+export default (props) => {
+  
 
+
+  
     return (
         <body>
 
-          <div>test</div>
+          <div></div>
 
             
         </body>

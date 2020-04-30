@@ -7,13 +7,14 @@
 }
 .search-box{
 width: 50em;
-height: 30em;
+height: 20em;
   //min-height: 44em;
   display: flex;
   justify-content: center;
-  align-items: left;
+  align-items: center;
   margin-top: 20px;
   background-color: rgba(0, 0, 0, 0.1);
+  flex-direction: column;
     
   
     
@@ -24,6 +25,27 @@ height: 30em;
 }
 
 .flight-radios{
-  margin-top: 70px;
+  
   justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.search-footer{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.test{
+  
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+ 
 }
