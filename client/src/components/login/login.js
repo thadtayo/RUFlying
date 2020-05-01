@@ -27,7 +27,7 @@ export default (props) => {
            setLoginResp(res.data)
            
        } else {
-           history.push("/profile")
+           history.push("/search")
        }
     
     }
