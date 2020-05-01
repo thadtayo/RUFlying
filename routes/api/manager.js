@@ -66,6 +66,8 @@ router.get('/create_customer', (req, res) => {
     }
 });
 
+
+
 // edit the customer's information
 router.post('/edit_customer', (req, res) => {
 
