@@ -5,7 +5,7 @@ import FlightList from '../components/FlightList'
 
 export default (props) => {
 
-    
+    // const depart =(props.location.state.departDate)
 
     const [flights, setFlights] = useState([])
     const[direction, setDirection] = useState("departing")
@@ -15,27 +15,36 @@ export default (props) => {
     const[departDate, setDepart] = useState(props.location.state.departDate)
     const[returnDate, setReturn] = useState(props.location.state.returnDate)
     const[roundtrip, setRound] = useState(props.location.state.roundTrip)
-    const[roundtrip, setRound] = useState(props.location.state.numFlyers)
+    const[numFlyers, setNum] = useState(props.location.state.numFlyers)
+    const [flight, setFlight] = useState({start: start, end:end, date:departDate})
 
     useEffect(() => {
-        let flight = {
-            start:start,
-            end:end 
-        }
 
-       async (() => {
-        let res = await axios.post("api/flights/show-flights", flight)
+        ( async () => {
+        let res = await axios.get("api/flights/show-flights", flight)
+        console.log(res.data)
+        setFlights(res)
+
        })()
 
-       console.log(res.data)
+     
     })
     
    
 
     return(
         <div>
-            <h1>Select a {direction} flight </h1>
+
+            <div>
+                <h1>Select a {direction} flight </h1>
+            
+            </div>
+
+            <div>
+                <FlightList result = {flights} numFlyers = {numFlyers}/>
+            </div>
+
         </div>
-        // <FlightList results = {flights}/>
+       
     )
 }

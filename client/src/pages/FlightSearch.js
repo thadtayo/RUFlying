@@ -17,14 +17,15 @@ export default () => {
     const [end, setEnd] = useState("")
     const[roundTrip, setRoundTrip] = useState(false)
     const[oneWay, setOneWay] = useState(false)
-    const[departDate, setDepartDate] = useState(new Date())
-    const[returnDate, setReturnDate] = useState(new Date())
+    const[departDate, setDepartDate] = useState("")
+    const[returnDate, setReturnDate] = useState("")
     const[numFlyers, setNum] = useState(1)
     let history  = useHistory()
 
 
 
     var searchFlight = () => {
+        console.log(returnDate) 
         history.push({
             pathname: "/flights", 
             state: {
@@ -121,7 +122,10 @@ export default () => {
                                         />
                                         <br/>
                                         <div className = "return-calendar">
-                                            <DatePicker selected = {returnDate}onChange = {date => setReturnDate(date)} placeholderText = "Returning date"/>
+                                            <DatePicker
+                                                selected = {returnDate}
+                                                onChange = {(date) => setReturnDate(date)} 
+                                                placeholderText = "Returning date"/>
                                          </div>
                                     </Col>
                                 </Row>
