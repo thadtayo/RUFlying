@@ -5,13 +5,29 @@ import FlightList from '../components/FlightList'
 
 export default (props) => {
 
+    
+
     const [flights, setFlights] = useState([])
     const[direction, setDirection] = useState("departing")
-    const[start, setStart] = useState("")
     const[state, setState] = useState(props.location.state)
+    const[start, setStart] = useState(props.location.state.start)
+    const[end, setEnd] = useState(props.location.state.end)
+    const[departDate, setDepart] = useState(props.location.state.departDate)
+    const[returnDate, setReturn] = useState(props.location.state.returnDate)
+    const[roundtrip, setRound] = useState(props.location.state.roundTrip)
+    const[roundtrip, setRound] = useState(props.location.state.numFlyers)
 
     useEffect(() => {
-        console.log(state)
+        let flight = {
+            start:start,
+            end:end 
+        }
+
+       async (() => {
+        let res = await axios.post("api/flights/show-flights", flight)
+       })()
+
+       console.log(res.data)
     })
     
    

@@ -19,6 +19,7 @@ export default () => {
     const[oneWay, setOneWay] = useState(false)
     const[departDate, setDepartDate] = useState(new Date())
     const[returnDate, setReturnDate] = useState(new Date())
+    const[numFlyers, setNum] = useState(1)
     let history  = useHistory()
 
 
@@ -31,26 +32,21 @@ export default () => {
                     end: end,
                     roundTrip: roundTrip,
                     departDate: departDate,
-                    returnDate: returnDate
+                    returnDate: returnDate,
+                    numFlyers:numFlyers
                     }
         })
     }
 
      var handleOneCheck = () =>  {
-         if(roundTrip){
-             setOneWay(false)
-         } else {
-        setOneWay(!oneWay)
-         }
+      
+         setRoundTrip(false)
+         setOneWay(true)
     }
     
     var handleRoundCheck = () =>  {
-        if(oneWay){
-            setRoundTrip(false)
-        } else {
-       setRoundTrip(!roundTrip)
-        }
-        
+       setOneWay(false)
+       setRoundTrip(true)
     }
 
     return(
@@ -131,6 +127,25 @@ export default () => {
                                 </Row>
                             </Form.Group>
                         </fieldset>
+
+
+                            <Form.Group controlId="exampleForm.ControlSelect1">
+                                <Form.Label>Travelers</Form.Label>
+                                    <Form.Control 
+                                        as="select"
+                                        value = {numFlyers}
+                                        onChange = {e => setNum(e.target.value)}
+                                    >
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                        <option>8</option>
+                                        </Form.Control>
+                                        </Form.Group>
                     </Form>
                 </div>
 
