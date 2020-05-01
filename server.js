@@ -5,6 +5,7 @@ const session = require('express-session');
 
 const customers = require('./routes/api/customers');
 const flights = require('./routes/api/flights');
+const manager = require('./routes/api/manager');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(session({
 // Routes configuration
 app.use('/api/customers', customers);
 app.use('/api/flights', flights);
+app.use('/api/manager', manager);
 
 // Port Definition
 const port = process.env.PORT || 5000;
