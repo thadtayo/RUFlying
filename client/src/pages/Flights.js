@@ -1,14 +1,16 @@
 import React, {useState, useEffect} from 'react'
 import Navbar from '../components/Navbar'
 import axios from 'axios'
-import FlightList from '../components/FlightList'
+
+import "../styles/flight.scss"
+import Flight from '../components/Flight'
 
 export default (props) => {
 
     // const depart =(props.location.state.departDate)
 
-    const [flights, setFlights] = useState([])
-    const[direction, setDirection] = useState("departing")
+    const[flights, setFlights] = useState([1,2,3,4])
+    
     const[state, setState] = useState(props.location.state)
     const[start, setStart] = useState(props.location.state.start)
     const[end, setEnd] = useState(props.location.state.end)
@@ -16,35 +18,46 @@ export default (props) => {
     const[returnDate, setReturn] = useState(props.location.state.returnDate)
     const[roundtrip, setRound] = useState(props.location.state.roundTrip)
     const[numFlyers, setNum] = useState(props.location.state.numFlyers)
-    const [flight, setFlight] = useState({start: start, end:end, date:departDate})
+    const [flight, setFlight] = useState({start: start, end:end, pref_date:departDate, num_travelers:numFlyers})
+
 
     useEffect(() => {
+        
 
         ( async () => {
         let res = await axios.get("api/flights/show-flights", flight)
-        console.log(res.data)
-        setFlights(res)
+        
+            setFlights(res)
 
        })()
 
      
     })
     
+    console.log(flight)
    
 
-    return(
-        <div>
+    return (
+        <body>
 
-            <div>
-                <h1>Select a {direction} flight </h1>
-            
-            </div>
+          <Navbar/>
 
-            <div>
-                <FlightList result = {flights} numFlyers = {numFlyers}/>
-            </div>
-
+        <div className = "flights-header">
+            <h1>Select {props.location.state.direction} flight</h1>
         </div>
-       
+
+          
+          <div className = "x">
+
+            {flights.map((x) => 
+              
+              <Flight flight = {x} state = {state} />
+          )}
+          </div>
+        
+
+            
+        </body>
+        
     )
 }

@@ -13,7 +13,7 @@ export default (props) => {
     const [zip, setZip] = useState("");
     const [state, setState] = useState("");
     const [phone, setPhone] = useState("");
-    const[resp, setResp] = useState("")
+    
 
     const register = async () => {
         let user = {
@@ -44,7 +44,7 @@ export default (props) => {
                      <img src = {loginImg} />  
                     </div>
 
-                    <div>{resp}</div>
+                    
 
                     <div className = "form">
                         <div className = "form-group">

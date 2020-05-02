@@ -32,7 +32,7 @@ export default class LoginRegister extends React.Component{
       render() {
         const { isLogginActive } = this.state
         const current = isLogginActive ? "Register" : "Login"
-        const currentActive = isLogginActive ? "login" : "register"
+        
         return (
           
           <div className="Ap">

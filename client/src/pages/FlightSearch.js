@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import Navbar from '../components/Navbar'
-import axios from 'axios'
-import FlightList from '../components/FlightList'
+
 import "../styles/search.scss"
 import {Form, Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +11,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 
 export default () => {
-    const [flights, setFlights] = useState([])
+    
     const[start, setStart] = useState("")
     const [end, setEnd] = useState("")
     const[roundTrip, setRoundTrip] = useState(false)
@@ -34,7 +33,8 @@ export default () => {
                     roundTrip: roundTrip,
                     departDate: departDate,
                     returnDate: returnDate,
-                    numFlyers:numFlyers
+                    numFlyers:numFlyers,
+                    direction:"departing"
                     }
         })
     }

@@ -1,0 +1,104 @@
+.flight-container {
+    font-family: sans-serif;
+    background-color:   rgba(128, 128, 128, 0.11);
+    height: 200px;
+    width:750px;
+    display: flex;
+    overflow: auto;
+    margin-bottom: 40px;
+    flex-direction: row;
+  }
+  
+  .flight-date {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    left: 50px;
+  
+    
+  }
+  
+  .flight-info {
+    background-color: blue;
+  }
+  .flight-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+    position: relative;
+    
+    left: 360px;
+    top: 70px;
+
+    
+    font-size: 21px;
+    padding: 5px 20px;
+    border: 0;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    transition: all 250ms ease-in-out;
+    cursor: pointer;
+        &:hover {
+          background-color: #2386c8;
+        }
+        &:focus {
+          outline: none;
+        }
+    }
+      
+  
+
+  
+.flights-header{
+    display: flex;
+    margin-bottom: 40px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  .flight-list{
+      display: flex;
+      justify-content: center;
+  }
+
+
+  .time{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      bottom:90px;
+  }
+  
+
+  .stops{
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-items: center;
+      justify-content: center;
+      left:170px;
+  }
+
+  .fare{
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    left:300px;
+}
+
+.x{
+    display: flex;
+    flex-direction: column;;
+    align-items: center ;
+    justify-content: center;
+}
