@@ -9,7 +9,7 @@ export default (props) => {
 
     // const depart =(props.location.state.departDate)
 
-    const[flights, setFlights] = useState([1,2,3,4])
+    const[flights, setFlights] = useState([])
     
     const[state, setState] = useState(props.location.state)
     const[start, setStart] = useState(props.location.state.start)
@@ -25,9 +25,11 @@ export default (props) => {
         
 
         ( async () => {
-        let res = await axios.get("api/flights/show-flights", flight)
+            console.log(flight)
+        let res = await axios.post("api/flights/show-flights", flight)
         
             setFlights(res)
+            console.log(flights)
 
        })()
 

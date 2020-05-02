@@ -124,7 +124,7 @@ export default () => {
                                         <div className = "return-calendar">
                                             <DatePicker
                                                 selected = {returnDate}
-                                                onChange = {(date) => setReturnDate(date)} 
+                                                onChange = {(d) => setReturnDate(d)} 
                                                 placeholderText = "Returning date"/>
                                          </div>
                                     </Col>
