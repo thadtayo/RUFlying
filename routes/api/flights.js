@@ -49,7 +49,7 @@ router.post('/show-flights', (req, res) =>{
     let day = date_inp.substring(0, 2);
     date_inp = date_inp.substring(3);
     // get year
-    let year = date.substring(0, 4);
+    let year = date_inp.substring(0, 4);
     // concat
     let date = year + '-' + month + '-' + day;
     
@@ -104,6 +104,7 @@ router.post('/purchase-flight', (req, res) => {
     const arrive_time = req.body.arrive_time;
     const restrictions = req.body.restrictions;
     const num_stops = req.body.num_stops;
+    const num_travelers = req.body.num_travelers;
 
     const account_num = req.session.account_num;
 
