@@ -22,7 +22,7 @@ export default ({ flight, state}) => {
         })
     }, [1])
         
-    var handleSelect = () => {
+    var handleSelect = async () => {
         let book = {
             start: state.start,
             end: state.end,
@@ -33,7 +33,15 @@ export default ({ flight, state}) => {
             num_stops: flight.num_stops,
         }
 
-        axios.post("api/flights/purchase-flight", book)
+       let res = await axios.post("api/flights/purchase-flight", book)
+
+         console.log(res)
+
+        navigateTo()
+
+    }
+
+    var navigateTo = () => {
 
         if(state.roundTrip){
             console.log(returnState)
@@ -45,7 +53,7 @@ export default ({ flight, state}) => {
             history.push("/profile")
         }
     }
-
+    
 
 
 

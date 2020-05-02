@@ -2,7 +2,7 @@
     font-family: sans-serif;
     background-color:   rgba(128, 128, 128, 0.11);
     height: 200px;
-    width:750px;
+    width:55%;
     display: flex;
     overflow: auto;
     margin-bottom: 40px;
@@ -10,12 +10,14 @@
   }
   
   .flight-date {
+    width: 50px;
     display: flex;
     position: relative;
     align-items: center;
     justify-items: center;
     justify-content: center;
-    left: 50px;
+    flex-direction: column;
+    left: 100px;
   
     
   }
@@ -31,7 +33,7 @@
    
     position: relative;
     
-    left: 360px;
+    left: 490px;
     top: 70px;
 
     
@@ -67,6 +69,7 @@
   .flight-list{
       display: flex;
       justify-content: center;
+      flex-direction: column;
   }
 
 
@@ -74,7 +77,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      bottom:90px;
+      bottom:200px;
   }
   
 
@@ -84,7 +87,7 @@
       align-items: center;
       justify-items: center;
       justify-content: center;
-      left:170px;
+      left:260px;
   }
 
   .fare{
@@ -93,7 +96,7 @@
     align-items: center;
     justify-items: center;
     justify-content: center;
-    left:300px;
+    left:380px;
 }
 
 .x{

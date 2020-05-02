@@ -6,6 +6,7 @@ import {Form, Row, Col} from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useHistory} from 'react-router-dom'
 import DatePicker from "react-datepicker";
+
  
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -23,7 +24,11 @@ export default () => {
 
 
 
-    var searchFlight = () => {
+    var searchFlight = async () => {
+        if(roundTrip == false && oneWay == false){
+            window.alert("Please select type of flight")
+        } else {
+
         console.log(returnDate) 
         history.push({
             pathname: "/flights", 
@@ -31,13 +36,15 @@ export default () => {
                     start: start,
                     end: end,
                     roundTrip: roundTrip,
-                    departDate: departDate,
+                    departDate:departDate,
                     returnDate: returnDate,
                     numFlyers:numFlyers,
                     direction:"departing"
                     }
         })
     }
+    }
+
 
      var handleOneCheck = () =>  {
       

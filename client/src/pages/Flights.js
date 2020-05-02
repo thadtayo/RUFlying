@@ -14,27 +14,28 @@ export default (props) => {
     const[state, setState] = useState(props.location.state)
     const[start, setStart] = useState(props.location.state.start)
     const[end, setEnd] = useState(props.location.state.end)
-    const[departDate, setDepart] = useState(props.location.state.departDate)
+    const[departDate, setDepart] = useState((props.location.state.departDate).toString())
     const[returnDate, setReturn] = useState(props.location.state.returnDate)
     const[roundtrip, setRound] = useState(props.location.state.roundTrip)
     const[numFlyers, setNum] = useState(props.location.state.numFlyers)
     const [flight, setFlight] = useState({start: start, end:end, pref_date:departDate, num_travelers:numFlyers})
 
 
-    useEffect(() => {
+    useEffect( () => {
         
-
-        ( async () => {
-            console.log(flight)
-        let res = await axios.post("api/flights/show-flights", flight)
+           console.log(departDate)
+        async function getFlights(){
         
-            setFlights(res)
-            console.log(flights)
+        const res = await axios.post("api/flights/show-flights", flight)
+            setFlights(res.data)
+            console.log(res.data)
 
-       })()
+    }
 
-     
-    })
+    getFlights()
+  }, [1])
+
+  
     
     console.log(flight)
    
