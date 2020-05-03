@@ -138,8 +138,8 @@ router.post('/purchase-flight', (req, res) => {
                         isDomestic = false;
                     }
                     // with customer_rep selected, create reservation
-                    var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops) 
-                    VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops})`;
+                    var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops, num_travelers) 
+                    VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops}, ${num_travelers})`;
                     connection.query(sql2, function(err2){
                         if (err2) throw err2;
                         // Reservation created. Now, create hasReservations
