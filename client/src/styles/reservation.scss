@@ -1,0 +1,87 @@
+.reservation-container {
+    font-family: sans-serif;
+    background-color:   rgba(128, 128, 128, 0.11);
+    height: 200px;
+    width:60%;
+    display: flex;
+    overflow: auto;
+    margin-bottom: 40px;
+    flex-direction: column;
+    
+  }
+
+  .depart-date{
+      display: flex;
+      
+      justify-content: center;
+  }
+
+  .depart-info{
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center;  
+      align-content: center;  
+      left: -90px;
+      top:20px;
+  }
+  
+  .arrw{
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      align-items: center;
+      align-content: center;
+      left: 130px;
+      bottom: 60px;
+  }
+
+  .arrive-info{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center; 
+    right: -70px
+}
+
+.num-passengers{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    right:190px;
+    top: -4px;
+
+   
+}
+
+.num{
+    position: relative;
+    display: flex;
+    font-size: 20px;
+   
+}
+
+
+.tot-fare{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    right: -190px;
+    font-size:20px;
+  
+  
+}
+
+.res-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+}
+
