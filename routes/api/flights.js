@@ -53,9 +53,9 @@ router.post('/show-flights', (req, res) =>{
     // concat
     let date = year + '-' + month + '-' + day;
     
-    const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
+    const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares, f3.occupancy, f3.num_seats
     FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
-    AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) = \"${date}\"`;
+    AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) = \"${date}\" AND f3.occupancy < f3.num_seats`;
     con.getConnection(function(error, connection){
         connection.query(sql, function(err, results){
             if (err) throw err;
@@ -138,14 +138,18 @@ router.post('/purchase-flight', (req, res) => {
                         isDomestic = false;
                     }
                     // with customer_rep selected, create reservation
-                    var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops) 
-                    VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops})`;
+                    var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops, num_travelers) 
+                    VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops}, ${num_travelers})`;
                     connection.query(sql2, function(err2){
                         if (err2) throw err2;
                         // Reservation created. Now, create hasReservations
                         connection.query(`INSERT INTO hasReservations VALUES (\"${account_num}\", \"${reservation_num}\")`, function(err3){
                             if (err3) throw err3;
                             res.send('Purchase confirmed! You can view this reservation again by going into your Profile > Reservations.');
+                            // lastly, update flight occupancy
+                            connection.query(`UPDATE Flights SET occupancy = occupancy + ${num_travelers} WHERE flight_num = ${flight_num}`, function(errlast){
+                                if(errlast) throw errlast;
+                            });
                         });
                     });
                 });

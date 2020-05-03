@@ -3,7 +3,7 @@ import '../styles/flight.scss'
 import axios from 'axios'
 import {useHistory} from 'react-router-dom'
 
-export default ({ flight, state}) => {
+export default ({ flight, state, num_travelers}) => {
    
     const[returnState, setReturn] = useState({})
     let history = useHistory()
@@ -31,6 +31,7 @@ export default ({ flight, state}) => {
             depart_time: flight.depart_time,
             arrive_time: flight.arrive_time,
             num_stops: flight.num_stops,
+            num_travelers: num_travelers
         }
 
        let res = await axios.post("api/flights/purchase-flight", book)
@@ -50,7 +51,7 @@ export default ({ flight, state}) => {
                 state: returnState
             })
         } else {
-            history.push("/profile")
+            history.push("/reservations")
         }
     }
     

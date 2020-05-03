@@ -7,7 +7,7 @@ import Flight from '../components/Flight'
 
 export default (props) => {
 
-    // const depart =(props.location.state.departDate)
+   
 
     const[flights, setFlights] = useState([])
     
@@ -24,6 +24,7 @@ export default (props) => {
     useEffect( () => {
         
            console.log(departDate)
+
         async function getFlights(){
         
         const res = await axios.post("api/flights/show-flights", flight)
@@ -54,7 +55,7 @@ export default (props) => {
 
             {flights.map((x) => 
               
-              <Flight flight = {x} state = {state} />
+              <Flight flight = {x} state = {state} num_travelers = {numFlyers}/>
           )}
           </div>
         

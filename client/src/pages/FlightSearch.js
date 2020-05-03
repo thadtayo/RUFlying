@@ -25,7 +25,7 @@ export default () => {
 
 
     var searchFlight = async () => {
-        if(roundTrip == false && oneWay == false){
+        if(roundTrip === false && oneWay === false){
             window.alert("Please select type of flight")
         } else {
 

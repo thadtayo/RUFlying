@@ -30,9 +30,9 @@ export default (props) => {
         
        console.log(res.data)
         
+       window.location.reload(false)
 
-        history.push("/login");
-    }
+        }
 
         return (
             
