@@ -5,5 +5,6 @@ import CustomerProfile from "./CustomerProfile";
 import FlightSearch from "./FlightSearch"
 import Flights from './Flights'
 import ManagerFlights from "./ManagerFlights";
+import Reservations from "./Reservations"
 
-export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights};
+export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations};

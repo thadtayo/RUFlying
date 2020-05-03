@@ -76,6 +76,7 @@ export default () => {
 
     return (
         <div>
+            <h1>Search Flights</h1>
             <Form style = {{marginLeft: 20, marginTop: 20}}>
             <Form.Group as = {Row}>
                     

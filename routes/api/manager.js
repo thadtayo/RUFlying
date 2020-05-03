@@ -107,7 +107,7 @@ router.get('/all_reservations', (req, res) => {
 
 // get all flights
 router.get('/all_flights', (req, res) => {
-    if(true) {
+    if(req.session.isCustomer == false) {
         con.query("SELECT * FROM Flights", function(err, results, fields){
             if(err) throw err;
             res.json(results);
