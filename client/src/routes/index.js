@@ -1,7 +1,7 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom"
 
-import {LoginRegister, Home, CustomerProfile, EditUser, FlightSearch, Reservations, Flights} from "../pages";
+import {LoginRegister, Home, CustomerProfile, EditUser, FlightSearch, Reservations, Flights, logout} from "../pages";
 import Manager from "./manager";
 
 
