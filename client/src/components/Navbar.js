@@ -16,7 +16,7 @@ export default  () => {
             <Nav.Link href="/search">Search For Flight</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2"> My Reservations</NavDropdown.Item>
+            <NavDropdown.Item href="/reservations"> My Reservations</NavDropdown.Item>
           
             </NavDropdown>
             </Nav>

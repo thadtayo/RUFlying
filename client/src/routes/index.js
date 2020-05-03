@@ -14,6 +14,7 @@ export default () => {
                 <Route path = "/edit" component = {EditUser}></Route>
                 <Route path = "/search" component ={FlightSearch}></Route>
                 <Route path = "/flights" component ={Flights}></Route>
+                <Route path = "/reservations" component = {Reservations}></Route>
                 <Route path = "/" component = {LoginRegister}></Route>
                 
                 
