@@ -1,29 +1,9 @@
-let date = 'Fri Apr 24 2020 21:16:35 GMT-0400';
+let date = "2020-04-27";
 
-let months = 
-{
-    'Jan': '01',
-    'Feb': '02',
-    'Mar': '03',
-    'Apr': '04',
-    'May': '05',
-    'Jun': '06',
-    'Jul': '07',
-    'Aug': '08',
-    'Sep': '09',
-    'Oct': '10',
-    'Nov': '11',
-    'Dec': '12'
-}
+const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+const firstDate = new Date();
+const secondDate = new Date(date);
 
-date = date.substring(4);
+const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)) - 1;
 
-let month = date.substring(0, 3);
-month = months[month];
-date = date.substring(4);
-let day = date.substring(0, 2);
-date = date.substring(3);
-let year = date.substring(0, 4);
-
-let date_sql = year + '-' + month + '-' + day;
-console.log(date_sql);
+console.log(diffDays);

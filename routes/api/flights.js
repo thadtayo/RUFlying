@@ -54,8 +54,10 @@ router.post('/show-flights', (req, res) =>{
     let date = year + '-' + month + '-' + day;
     
     const sql = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares, f3.occupancy, f3.num_seats
-    FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
+    FROM flightHasStops f1, flightHasStops f2, Flights f3 
+    WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
     AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) = \"${date}\" AND f3.occupancy < f3.num_seats`;
+    
     con.getConnection(function(error, connection){
         connection.query(sql, function(err, results){
             if (err) throw err;
@@ -64,15 +66,37 @@ router.post('/show-flights', (req, res) =>{
             // if none available for selected date, search for flights from up to 7 days prior
             if(count == 0){
                 console.log('Giving recommendations near');
-                const sql2 = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares
+                const sql2 = `SELECT f1.flight_num, f1.airport_id AS start, f2.airport_id AS end, f1.depart_time, f2.arrive_time, f1.stop_num as start_stop, f2.stop_num as end_stop, f3.fares, CONVERT(f1.depart_time, DATE) AS depart_converted
                 FROM flightHasStops f1, flightHasStops f2, Flights f3 WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
                 AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) >= DATE_SUB(\"${date}\", INTERVAL 7 DAY)`;
                 connection.query(sql2, function(err2, results2){
                     var count2 = Object.keys(results2).length;
                     for(let i = 0; i < count2; i++){
+                        // total fare with stops
                         let num_stops = results2[i]['end_stop'] - results2[i]['start_stop'];
                         results2[i]['total_fare'] = results2[i]['fares'] * num_stops;
                         results2[i]['num_stops'] = num_stops;
+
+                        // subtract based on day viewed
+                        const date = results2[i]['depart_converted'];
+                        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                        const firstDate = new Date();
+                        const secondDate = new Date(date);
+                        const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)) - 1;
+                        if(diffDays >= 21){
+                            results2[i]['total_fare'] = results2[i]['total_fare'] - 50;
+                        }
+                        else if(diffDays >= 14){
+                            results2[i]['total_fare'] = results2[i]['total_fare'] - 30;
+                        }
+                        else if(diffDays >= 7){
+                            results2[i]['total_fare'] = results2[i]['total_fare'] - 20;
+                        }
+                        else if(diffDays >= 3){
+                            results2[i]['total_fare'] = results2[i]['total_fare'] - 10;
+                        }
+
+
                     }
                     res.json(results2);
                 });
@@ -82,6 +106,25 @@ router.post('/show-flights', (req, res) =>{
                     let num_stops = results[i]['end_stop'] - results[i]['start_stop'];
                     results[i]['total_fare'] = results[i]['fares'] * num_stops;
                     results[i]['num_stops'] = num_stops;
+
+                    // subtract based on day viewed
+                    const date = results2[i]['depart_converted'];
+                    const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+                    const firstDate = new Date();
+                    const secondDate = new Date(date);
+                    const diffDays = Math.round(Math.abs((firstDate - secondDate) / oneDay)) - 1;
+                    if(diffDays >= 21){
+                        results2[i]['total_fare'] = results2[i]['total_fare'] - 50;
+                    }
+                    else if(diffDays >= 14){
+                        results2[i]['total_fare'] = results2[i]['total_fare'] - 30;
+                    }
+                    else if(diffDays >= 7){
+                        results2[i]['total_fare'] = results2[i]['total_fare'] - 20;
+                    }
+                    else if(diffDays >= 3){
+                        results2[i]['total_fare'] = results2[i]['total_fare'] - 10;
+                    }
                 }
                 res.json(results);
             }
@@ -137,6 +180,9 @@ router.post('/purchase-flight', (req, res) => {
                     if(country1 != country2){
                         isDomestic = false;
                     }
+
+                    // multiply total_fare by num_travelers
+                    total_fare *= num_travelers;
                     // with customer_rep selected, create reservation
                     var sql2 = `INSERT INTO Reservations (reservation_num, restrictions, start_airport, end_airport, depart_time, arrive_time, total_fare, customer_rep, flight_num, isDomestic, num_stops, num_travelers) 
                     VALUES (\"${reservation_num}\", \"${restrictions}\", \"${start}\", \"${end}\", \"${depart_time}\", \"${arrive_time}\", ${total_fare}, \"${customer_rep}\", ${flight_num}, ${isDomestic}, ${num_stops}, ${num_travelers})`;
