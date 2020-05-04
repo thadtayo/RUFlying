@@ -57,7 +57,7 @@ router.post('/show-flights', (req, res) =>{
     FROM flightHasStops f1, flightHasStops f2, Flights f3 
     WHERE f1.flight_num = f2.flight_num AND f1.flight_num = f3.flight_num AND f1.airline_id = f2.airline_id AND f1.airport_id <> f2.airport_id AND f1.airport_id = \"${start}\" AND f2.airport_id = \"${end}\"
     AND f1.depart_time < f2.arrive_time AND CONVERT(f1.depart_time, DATE) = \"${date}\" AND f3.occupancy < f3.num_seats`;
-    
+
     con.getConnection(function(error, connection){
         connection.query(sql, function(err, results){
             if (err) throw err;
@@ -142,7 +142,7 @@ router.post('/purchase-flight', (req, res) => {
     const start = req.body.start;
     const end = req.body.end;
     const flight_num = req.body.flight_num;
-    const total_fare = req.body.total_fare;
+    let total_fare = req.body.total_fare;
     const depart_time = req.body.depart_time;
     const arrive_time = req.body.arrive_time;
     const restrictions = req.body.restrictions;
