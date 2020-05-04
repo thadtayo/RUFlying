@@ -9,5 +9,7 @@ import Reservations from "./Reservations"
 import logout from "../components/logout"
 import MoreDetails from './MoreDetails'
 import CreditCard from './CreditCard'
+import AddCostumer from './AddCostumer'
+import Revenue from "./Revenue"
 
-export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, MoreDetails, CreditCard};
+export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, MoreDetails, CreditCard, AddCostumer, Revenue};
