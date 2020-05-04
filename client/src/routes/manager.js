@@ -2,14 +2,15 @@ import React from "react";
 import {Switch, Route} from "react-router-dom"
 
 import ManNav from "../components/ManagerNav"
-import {ManagerFlights} from "../pages"
+import {ManagerFlights, Revenue} from "../pages"
 
 export default () => {
     return(
         <div>
             <ManNav/>
         <Switch>
-            <Route path = "/manager"><ManagerFlights/></Route>
+            <Route exact path = "/manager"><ManagerFlights/></Route>
+            <Route path = "/manager/revenue"><Revenue/></Route>
         </Switch>
         </div>
     );

@@ -75,9 +75,9 @@ export default () => {
     }
 
     return (
-        <div>
+        <div style = {{marginLeft: 20}}>
             <h1>Search Flights</h1>
-            <Form style = {{marginLeft: 20, marginTop: 20}}>
+            <Form>
             <Form.Group as = {Row}>
                     
                     <Form.Check
@@ -144,7 +144,7 @@ export default () => {
 
                     <div>
                         {flightData ? flightData.map((item, key) => (
-                            <div>
+                            <div style = {{border: "1px solid black"}}>
                                 <p>flight num: {item.flight_num}</p>
                                 <p>Airline ID: {item.airline_id}</p>
                                 <p>Num Seats: {item.num_seats}</p>
