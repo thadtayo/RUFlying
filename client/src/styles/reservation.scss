@@ -22,7 +22,7 @@
       position: relative;
       align-items: center;  
       align-content: center;  
-      left: -90px;
+      left: -50px;
       top:20px;
   }
   
@@ -32,7 +32,7 @@
       position: relative;
       align-items: center;
       align-content: center;
-      left: 130px;
+      left: 110px;
       bottom: 60px;
   }
 
@@ -41,7 +41,7 @@
     flex-direction: column;
     position: relative;
     align-items: center; 
-    right: -70px
+    right: -90px
 }
 
 .num-passengers{
@@ -52,9 +52,7 @@
     justify-items: center;
     align-items: center;
     right:190px;
-    top: -4px;
-
-   
+     
 }
 
 .num{
@@ -63,17 +61,29 @@
     font-size: 20px;
    
 }
-
-
 .tot-fare{
     display: flex;
     flex-direction: column;
     position: relative;
+    justify-content: center;
+    justify-items: center;
     align-items: center;
-    right: -190px;
-    font-size:20px;
+    right:-200px;
+    top: 30px;
+    
+     
+}
+
+.fare{
+    
+    position: relative;
+    display: flex;
   
-  
+    align-items: center;
+    justify-content: center;
+    left: 0px;
+    
+    
 }
 
 .res-info{
@@ -84,4 +94,28 @@
     align-content: center;
     justify-items: center;
 }
+
+
+
+.details-btn {
+    display: flex;
+    position: relative;
+    font-size: 21px;
+    padding: 5px 20px;
+    border: 0;
+    margin-top: 15px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+    left: -300px;
+    bottom: 2px;
+    cursor: pointer;
+    &:hover {
+      background-color: #2386c8;
+    }
+    &:focus {
+      outline: none;
+    }
+  }
 

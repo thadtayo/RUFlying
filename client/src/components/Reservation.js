@@ -1,17 +1,26 @@
 import React, {useState} from 'react'
+import {useHistory} from 'react-router-dom'
+
 
 import '../styles/reservation.scss'
 import { FiArrowRight } from "react-icons/fi"
 
 
 export default ({ reservation }) => {
+    let history = useHistory()
 const [departDate, setDepartDate] = useState(reservation.depart_time.substring(0,10))
 const[departTime, setDepartTime] = useState(reservation.depart_time.substring(11,19))
 const [arriveDate, setArriveDate] = useState(reservation.arrive_time.substring(0,10))
 const[arriveTime, setArriveTime] = useState(reservation.arrive_time.substring(11,19))
 
 
+    var moreDetails = () => {
 
+        history.push({
+            pathname:"/moredetails",
+            state: reservation
+        })
+    }
 
 
 
@@ -24,12 +33,12 @@ return(
                     <h2>{departDate}</h2>
                </div>
 
-               
+
             <div className = "res-info"> 
 
 
                 <div className = "num-passengers ">
-                    <h3>Passengers:</h3>
+                    Passengers:
 
                     <div className = "num">
                         {reservation.num_travelers}
@@ -39,7 +48,7 @@ return(
 
                <div className = "depart-info">
                    <div className = "depart-time">
-                       <h3>{departTime}</h3>
+                        {departTime}
                    </div>
                    <div className = "depart-airport">
                         {reservation.start_airport}
@@ -54,7 +63,7 @@ return(
 
                    <div className = "arrive-info">
                         <div className = "arive-time">
-                            <h3>{arriveTime}</h3>
+                            {arriveTime}
                         </div>
                         <div className = "arrive-airport">
                             {reservation.end_airport}
@@ -62,19 +71,33 @@ return(
                    </div>
 
                    <div className = "tot-fare ">
-                    <h3>Total Fare:</h3>
+                        Total Fare:
+                        <div className = "fare">
+                            {reservation.total_fare}
+                        </div>
 
-                    
-                        {reservation.total_fare}
+
+                                        
+                <div className = "details-footer">
+                    <button type = "button" 
+                        className = "details-btn"
+                        onClick= {moreDetails}
+                    >
+                            More Details
+                    </button>
+                 </div> 
+
+                    </div>
             
 
-                </div>
-                </div>
-
-                   
-              
+                
 
 
+            </div>
+
+
+
+                
         </div>
 )
 

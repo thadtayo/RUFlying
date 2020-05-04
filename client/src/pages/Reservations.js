@@ -24,7 +24,7 @@ export default (props) => {
     }
 
     getReservations()
-  })
+  }, [1])
 
   
     

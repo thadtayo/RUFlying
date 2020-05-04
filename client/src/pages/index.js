@@ -7,7 +7,7 @@ import Flights from './Flights'
 import ManagerFlights from "./ManagerFlights";
 import Reservations from "./Reservations"
 import logout from "../components/logout"
-import Revenue from "./Revenue"
-import AddCostumer from "./AddCostumer"
+import MoreDetails from './MoreDetails'
+import CreditCard from './CreditCard'
 
-export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, Revenue, AddCostumer};
+export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, MoreDetails, CreditCard};
