@@ -57,17 +57,17 @@ export default () => {
     const getData = async () => {
         var response;
         if(all) {
-            response = await axios.get("http://localhost:5000/api/manager/all_flights")
+            response = await axios.get("../api/manager/all_flights")
 
         }else if(active) {
-            response = await axios.get("http://localhost:5000/api/manager/active_flights")
+            response = await axios.get("../api/manager/active_flights")
 
         }else if(onTime){
-            response = await axios.get("http://localhost:5000/api/manager/on_time")
+            response = await axios.get("../api/manager/on_time")
         }else if(delayed){
-            response = await axios.get("http://localhost:5000/api/manager/delayed")
+            response = await axios.get("../api/manager/delayed")
         }else {
-            response = await axios.get("http://localhost:5000/api/manager/airport_flights", {airport_id: formVal})
+            response = await axios.get("../api/manager/airport_flights", {airport_id: formVal})
         }
 
         setFlightData(response);

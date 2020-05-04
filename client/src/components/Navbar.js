@@ -12,7 +12,7 @@ export default  () => {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-            <Nav.Link href="/">Logout</Nav.Link>
+            <Nav.Link href="/logout">Logout</Nav.Link>
             <Nav.Link href="/search">Search For Flight</Nav.Link>
             <NavDropdown title="Profile" id="basic-nav-dropdown">
             <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>

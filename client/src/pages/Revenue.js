@@ -13,13 +13,13 @@ export default () => {
     const getData = async () => {
         var response;
         if(searchType === "Flight") {
-            response = await axios.get("http://localhost:5000/api/manager/flight_summary", {flight_num: formData})
+            response = await axios.get("../api/manager/flight_summary", {flight_num: formData})
 
         }else if(searchType === "Destination") {
-            response = await axios.get("http://localhost:5000/api/manager/city_summary", {city: formData})
+            response = await axios.get("../api/manager/city_summary", {city: formData})
 
         }else {
-            response = await axios.get("http://localhost:5000/api/manager/customer_summary", {email: formData})
+            response = await axios.get("../api/manager/customer_summary", {email: formData})
         }
 
         setFlightData(response);
@@ -69,14 +69,14 @@ export default () => {
 
     useEffect( () => {
         async function getStuff() {
-            const top = await axios.get("http://localhost:5000/api/manager/customer_max_rev")
+            const top = await axios.get("../api/manager/customer_max_rev")
             setTopData(top)
         }
         getStuff()
     })
 
     return(
-        <div>
+        <div style = {{marginLeft: 30}}>
             <h1>Most Total Revenue</h1>
             
             {topData ? 
@@ -88,7 +88,7 @@ export default () => {
             </div>
             : null}
             <hr/>
-            <ht/>
+            <hr/>
             <h1>Search Revenue</h1>
             <InputGroup style = {{width: 450}}>
                 <DropdownButton

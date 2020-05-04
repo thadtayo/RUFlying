@@ -6,6 +6,7 @@ import FlightSearch from "./FlightSearch"
 import Flights from './Flights'
 import ManagerFlights from "./ManagerFlights";
 import Reservations from "./Reservations"
+import logout from "../components/logout"
 import Revenue from "./Revenue"
 
-export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, Revenue};
+export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, Revenue};
