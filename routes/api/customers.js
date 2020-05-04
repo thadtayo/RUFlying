@@ -14,13 +14,8 @@ router.get('/', (req, res) => {
 });
 
 // register customer
-// TODO: FIX THIS TO BE PROPER; ERROR CHECK ON MULTIPLE EMAILS
-/*
-HANDLE:
-registering a duplicate email; double res.send() problem...
 
-*/
-router.post('/register', (req, res) => { //account num , email  first_name , last_name ,   address , zip , phone preferences  state
+router.post('/register', (req, res) => {
     let account_num = uuid.v4();
     // remove 4 hyphens
     account_num = account_num.replace('-', ''); 
@@ -107,7 +102,8 @@ router.post('/login', (req, res) =>{
                     });
                 }
                 else{
-                    return res.send('Incorrect email.');
+                    // search in employee page
+
                 }
             });
         });
@@ -187,7 +183,7 @@ router.get('/active-reservations', (req, res) =>{
     const account_num = req.session.account_num; 
     var sql = `SELECT Reservations.*
      FROM hasReservations INNER JOIN Reservations ON hasReservations.reservation_num = Reservations.reservation_num AND hasReservations.account_num = \"${account_num}\" 
-     AND Reservations.date >= CURDATE()`;
+     AND CONVERT(Reservations.depart_time, DATE) >= CURDATE()`;
 
     con.getConnection(function(error, connection){
         connection.query(sql, function(err, results){
