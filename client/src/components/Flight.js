@@ -22,38 +22,37 @@ export default ({ flight, state, num_travelers}) => {
         })
     }, [1])
         
-    var handleSelect = async () => {
-        let book = {
-            start: state.start,
-            end: state.end,
-            flight_num: flight.flight_num,
-            total_fare: flight.total_fare,
-            depart_time: flight.depart_time,
-            arrive_time: flight.arrive_time,
-            num_stops: flight.num_stops,
-            num_travelers: num_travelers
-        }
-
-       let res = await axios.post("api/flights/purchase-flight", book)
-
-         console.log(res)
-
-        navigateTo()
-
-    }
-
+    
     var navigateTo = () => {
 
-        if(state.roundTrip){
-            console.log(returnState)
-            history.push({
-                pathname: "/flights", 
-                state: returnState
+        history.push({pathname: "/creditcard",
+        
+            state: {returnState:returnState,
+                    roundTrip:state.roundTrip,
+                    start: state.start,
+                    end: state.end,
+                    flight_num: flight.flight_num,
+                    total_fare: flight.total_fare,
+                    depart_time: flight.depart_time,
+                    arrive_time: flight.arrive_time,
+                    num_stops: flight.num_stops,
+                    num_travelers: num_travelers
+                }
             })
-        } else {
-            history.push("/reservations")
+            
         }
-    }
+
+
+        // if(state.roundTrip){
+        //     console.log(returnState)
+        //     history.push({
+        //         pathname: "/flights", 
+        //         state: returnState
+        //     })
+        // } else {
+        //     history.push("/reservations")
+        // }
+    
     
 
 
@@ -70,12 +69,12 @@ export default ({ flight, state, num_travelers}) => {
                        Stops: {flight.num_stops}
                     </div>
 
-                    <div className="fare">
+                    <div className="flight-fare">
                         Total Fare: {flight.total_fare}
                     </div>
 
                 <div className = "footer">
-                    <button type = "button" className = "flight-button" onClick= {handleSelect} >Select</button>
+                    <button type = "button" className = "flight-button" onClick= {navigateTo} >Select</button>
                 </div>
 
 
