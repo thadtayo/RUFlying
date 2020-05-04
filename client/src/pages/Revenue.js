@@ -22,7 +22,7 @@ export default () => {
             response = await axios.get("../api/manager/customer_summary", {email: formData})
         }
 
-        setFlightData(response);
+        setFlightData(response.data);
         console.log(flightData)
     }
 
@@ -70,7 +70,7 @@ export default () => {
     useEffect( () => {
         async function getStuff() {
             const top = await axios.get("../api/manager/customer_max_rev")
-            setTopData(top)
+            setTopData(top.data)
         }
         getStuff()
     })

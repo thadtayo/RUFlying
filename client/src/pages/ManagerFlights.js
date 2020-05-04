@@ -70,7 +70,7 @@ export default () => {
             response = await axios.get("../api/manager/airport_flights", {airport_id: formVal})
         }
 
-        setFlightData(response);
+        await setFlightData(response.data);
         console.log(flightData)
     }
 
