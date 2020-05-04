@@ -15,7 +15,8 @@ export default  () => {
             <Nav.Link href="/">Logout</Nav.Link>
             <Nav.Link href="/manager">Flights</Nav.Link>
             <Nav.Link href="/manager/revenue">Revenue</Nav.Link>
-            <Nav.Link href="/manager/addCostumer">Add Costumer</Nav.Link>
+            <Nav.Link href="/manager/addCostumer">Add Customer</Nav.Link>
+            <Nav.Link href="/manager/editCustomer">Edit Customer</Nav.Link>
             </Nav>
         
         </Navbar.Collapse>

@@ -11,5 +11,6 @@ import MoreDetails from './MoreDetails'
 import CreditCard from './CreditCard'
 import AddCostumer from './AddCostumer'
 import Revenue from "./Revenue"
+import ManagerEdit from "./ManagerEdit"
 
-export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, MoreDetails, CreditCard, AddCostumer, Revenue};
+export {LoginRegister, Home, EditUser, CustomerProfile, FlightSearch, Flights, ManagerFlights, Reservations, logout, MoreDetails, CreditCard, AddCostumer, Revenue, ManagerEdit};
