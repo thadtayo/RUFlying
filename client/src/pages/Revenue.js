@@ -9,6 +9,8 @@ export default () => {
     const [formData, setFormData] = useState("");
     const [flightData, setFlightData] = useState(null)
     const [topData, setTopData] = useState(null)
+    const [monthForm, setMonthForm] = useState("")
+    const [monthData, setMonthData] = useState(null);
 
     const getData = async () => {
         var response;
@@ -67,6 +69,12 @@ export default () => {
         }
     }
 
+    const submitMonth = async () => {
+        const response = await axios.get("../api/manager/sales_report", {month_name: monthForm})
+        setMonthData(response.data)
+
+    }
+
     useEffect( () => {
         async function getStuff() {
             const top = await axios.get("../api/manager/customer_max_rev")
@@ -88,6 +96,18 @@ export default () => {
             </div>
             : null}
             <hr/>
+            <h1>Sales Report</h1>
+            <div style = {{display: "inline"}}>
+                <input value = {monthForm} onChange = {(e) => setMonthForm(e.target.value)} placeHolder = "Month"/>
+                <button onClick = {submitMonth}>Submit</button>
+            </div>
+            {monthData ? 
+            <div>
+                <p>Date: {monthData.date}</p>
+                <p>Total Revenue: {monthData.total_revenue}</p>
+            </div>
+            : null}
+
             <hr/>
             <h1>Search Revenue</h1>
             <InputGroup style = {{width: 450}}>
