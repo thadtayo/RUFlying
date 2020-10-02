@@ -1,8 +1,9 @@
-// Define modules
+// Define global modules
 const express = require('express');
 const Bodyparser = require('body-parser');
 const session = require('express-session');
 
+// Define local modules
 const customers = require('./routes/api/customers');
 const flights = require('./routes/api/flights');
 const manager = require('./routes/api/manager');
